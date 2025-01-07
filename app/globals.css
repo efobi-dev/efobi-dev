@@ -2,20 +2,108 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@font-face {
+  src: url('../assets/fonts/head.ttf');
+  font-family: 'bitter'
 }
 
-@media (prefers-color-scheme: dark) {
+h1, h2, h3, h4, h5, h6 {
+  font-family: bitter;
+}
+
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 0 0% 100%;
+    --foreground: 220 69% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 69% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 69% 15%;
+    --primary: 220 69% 15%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 220 69% 96%;
+    --secondary-foreground: 220 69% 15%;
+    --muted: 220 69% 96%;
+    --muted-foreground: 220 69% 45%;
+    --accent: 220 69% 96%;
+    --accent-foreground: 220 69% 15%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 69% 90%;
+    --input: 220 69% 90%;
+    --ring: 220 69% 15%;
+    --chart-1: 220 69% 45%;
+    --chart-2: 220 59% 35%;
+    --chart-3: 220 79% 25%;
+    --chart-4: 220 69% 55%;
+    --chart-5: 220 89% 45%;
+    --radius: 0.5rem;
+    --secondary-glow: conic-gradient(
+      from 10deg at 50% 50%,
+      #001f3f 0deg,
+      #003366 55deg,
+      #004080 120deg,
+      #0059b3 160deg,
+      transparent 360deg
+    );
+    --third-glow: conic-gradient(
+      from 90deg at 50% 50%,
+      #001f3f 0deg,
+      #003366 160deg,
+      #004080 120deg,
+      #0059b3 55deg,
+      transparent 360deg
+    );
+  }
+  .dark {
+    --background: 220 69% 5%;
+    --foreground: 220 69% 98%;
+    --card: 220 69% 5%;
+    --card-foreground: 220 69% 98%;
+    --popover: 220 69% 5%;
+    --popover-foreground: 220 69% 98%;
+    --primary: 220 69% 98%;
+    --primary-foreground: 220 69% 5%;
+    --secondary: 220 69% 15%;
+    --secondary-foreground: 220 69% 98%;
+    --muted: 220 69% 15%;
+    --muted-foreground: 220 69% 65%;
+    --accent: 220 69% 15%;
+    --accent-foreground: 220 69% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 220 69% 98%;
+    --border: 220 69% 15%;
+    --input: 220 69% 15%;
+    --ring: 220 69% 85%;
+    --chart-1: 220 69% 60%;
+    --chart-2: 220 59% 50%;
+    --chart-3: 220 79% 40%;
+    --chart-4: 220 69% 70%;
+    --chart-5: 220 89% 60%;
+    --secondary-glow: conic-gradient(
+      from 10deg at 50% 50%,
+      #001f3f 0deg,
+      #003366 55deg,
+      #004080 120deg,
+      #0059b3 160deg,
+      transparent 360deg
+    );
+    --third-glow: conic-gradient(
+      from 90deg at 50% 50%,
+      #001f3f 0deg,
+      #003366 160deg,
+      #004080 120deg,
+      #0059b3 55deg,
+      transparent 360deg
+    );
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }
