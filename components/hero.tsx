@@ -41,7 +41,7 @@ export function Hero() {
 					size={"lg"}
 					// onClick={() => router.push("/quote")}
 				>
-					<Link href="mailto:jenukohaefobi@gmail.com">Get a quote &rarr;</Link>
+					<Link href="mailto:owen@efobi.dev">Get a quote &rarr;</Link>
 				</Button>
 				<h2 className="text-xl md:text-2xl lg:text-3xl">
 					Design Driven Development for your products.

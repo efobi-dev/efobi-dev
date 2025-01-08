@@ -30,7 +30,7 @@ export function Header() {
 				</Button>
 			</nav>
 			<Button size={"icon"} variant={"ghost"} className="rounded-full">
-				<Link href={"mailto:jenukohaefobi@gmail.com"}>
+				<Link href={"mailto:owen@efobi.dev"}>
 					<MailPlus className="size-6" />
 				</Link>
 			</Button>

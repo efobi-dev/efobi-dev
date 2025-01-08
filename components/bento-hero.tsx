@@ -102,7 +102,7 @@ export function BentoHero() {
 					className="rounded-full place-self-end animate-pulse"
 					onClick={() => router.push("/quote")}
 				>
-					<Link href={"mailto:jenukohaefobi@gmail.com"}>
+					<Link href={"mailto:owen@efobi.dev"}>
 						<MailPlus />
 					</Link>
 				</Button>

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Header } from "@/components/header";
 import { Toaster } from "@/components/ui/toaster";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import "../assets/styles/main.css";
 
@@ -28,6 +30,8 @@ export default function RootLayout({
 				<Header />
 				{children}
 				<Toaster />
+				<SpeedInsights />
+				<Analytics />
 			</body>
 		</html>
 	);
