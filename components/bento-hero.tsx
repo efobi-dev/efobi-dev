@@ -100,7 +100,7 @@ export function BentoHero() {
 					variant={"outline"}
 					size={"icon"}
 					className="rounded-full place-self-end animate-pulse"
-					onClick={() => router.push("/quote")}
+					// onClick={() => router.push("/quote")}
 				>
 					<Link href={"mailto:owen@efobi.dev"}>
 						<MailPlus />

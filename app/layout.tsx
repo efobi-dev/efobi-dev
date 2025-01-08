@@ -16,6 +16,8 @@ export const metadata: Metadata = {
 	description: "Full stack web development agency",
 	openGraph: {
 		images: "/opengraph.png",
+		siteName: "efobi.dev",
+		url: "https://efobi.dev",
 	},
 };
 
