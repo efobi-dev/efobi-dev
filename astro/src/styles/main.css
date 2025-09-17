@@ -1,0 +1,132 @@
+body::before {
+    content: '';
+    position: fixed;
+    z-index: -1;
+    background: var(--fire-outer);
+    border-radius: 50%;
+    width: 50vw;
+    height: 50vw;
+    margin-left: -200px;
+    filter:blur(90px);  
+    top: calc(50vh - 50vw/2);
+    left: calc(50vw );
+    animation: animateBefore 7s cubic-bezier(0.47, 0, 0.745, 0.715) infinite;
+  }
+  
+body::after {
+    content: '';
+    position: fixed;
+    z-index: -1;
+    background: var(--fire-core);
+    border-radius: 50%;
+    width: 500px;
+    height: 700px;
+    filter:blur(90px);
+    top: calc(50vh - 50vw/2);
+    left: calc(50vw - 50vw/2);
+    animation: animateAfter 7s cubic-bezier(0.47, 0, 0.745, 0.715) infinite;
+  }
+
+  @keyframes animateBefore {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(200px) scale(0.8);
+  
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes animateAfter{
+    0% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(-250px) scale(1.2);
+  
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes clockwise {
+    0% {
+      top: -5px;
+      left: 0;
+    }
+    12% {
+      top: -2px;
+      left: 2px;
+    }
+    25% {
+      top: 0;
+      left: 5px;    
+    }
+    37% {
+      top: 2px;
+      left: 2px;
+    }
+    50% {
+      top: 5px;
+      left: 0;    
+    }
+    62% {
+      top: 2px;
+      left: -2px;
+    }
+    75% {
+      top: 0;
+      left: -5px;
+    }
+    87% {
+      top: -2px;
+      left: -2px;
+    }
+    100% {
+      top: -5px;
+      left: 0;    
+    }
+  }
+  
+  @keyframes counterclockwise {
+    0% {
+      top: -5px;
+      right: 0;
+    }
+    12% {
+      top: -2px;
+      right: 2px;
+    }
+    25% {
+      top: 0;
+      right: 5px;    
+    }
+    37% {
+      top: 2px;
+      right: 2px;
+    }
+    50% {
+      top: 5px;
+      right: 0;    
+    }
+    62% {
+      top: 2px;
+      right: -2px;
+    }
+    75% {
+      top: 0;
+      right: -5px;
+    }
+    87% {
+      top: -2px;
+      right: -2px;
+    }
+    100% {
+      top: -5px;
+      right: 0;    
+    }
+  }
