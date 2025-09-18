@@ -1,8 +1,8 @@
 ---
 import "../../styles/global.css";
 import "../../styles/main.css";
-import {Logo} from '@/components/logo'
 import {SEO} from 'astro-seo'
+import { Header } from "@/components/header";
 
 export interface Props {
   title: string;
@@ -58,8 +58,8 @@ const makeTitle = title
         },
       }} />
 	</head>
-	<body>
-        <Logo />
+	<body class="min-h-screen flex flex-col">
+        <Header client:load />
 		<slot />
         <style is:global>
       /* Improve Page speed */
