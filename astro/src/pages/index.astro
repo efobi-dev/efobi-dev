@@ -1,10 +1,11 @@
 ---
 import { StartButton } from "@/components/start"
 import Layout from "./layouts/Layout.astro"
+import { ChevronDown } from "lucide-react"
 ---
 
 <Layout title="Home">
-  <section class="min-h-screen p-8 flex items-center justify-center">
+  <section class="min-h-screen p-8 flex flex-col items-center justify-center">
     <!-- Mobile Layout: Stack vertically -->
     <div class="w-full max-w-[1400px] md:hidden flex flex-col items-center justify-center min-h-[80vh] gap-16 text-center">
       <div class="flex items-center justify-center">
@@ -14,9 +15,9 @@ import Layout from "./layouts/Layout.astro"
       </div>
       <div class="flex flex-col items-center gap-8">
         <p class="text-lg leading-relaxed text-accent-foreground m-0 max-w-sm">
-          At <span class="font-semibold">Efobi Dev</span>, we specialize <br /> in building digital products that <br /> feel as good as they look.
+          At <span class="font-semibold">efobi.dev</span>, we specialize <br /> in building digital products that <br /> feel as good as they look.
         </p>
-        <StartButton />
+        <StartButton client:load />
       </div>
     </div>
 
@@ -29,10 +30,13 @@ import Layout from "./layouts/Layout.astro"
       </div>
       <div class="col-start-2 row-start-2 flex flex-col justify-end items-end text-right gap-8">
         <p class="text-lg leading-relaxed text-accent-foreground m-0 max-w-sm">
-          At <span class="font-semibold">Efobi Dev</span>, we specialize <br /> in building digital products that <br /> feel as good as they look.
+          At <span class="font-semibold">efobi.dev</span>, we specialize <br /> in building digital products that <br /> feel as good as they look.
         </p>
-        <StartButton/>
+        <StartButton client:load />
       </div>
     </div>
+	<span>
+		<ChevronDown className="animate-bounce text-accent-foreground mx-auto md:hidden" />
+	</span>
   </section>
 </Layout>

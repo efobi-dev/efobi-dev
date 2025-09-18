@@ -3,6 +3,9 @@ import "../../styles/global.css";
 import "../../styles/main.css";
 import {SEO} from 'astro-seo'
 import { Header } from "@/components/header";
+import { ClientRouter } from "astro:transitions";
+import { Footer } from "@/components/footer";
+import {Toaster} from 'sonner'
 
 export interface Props {
   title: string;
@@ -15,15 +18,15 @@ export interface Props {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
 const { title, description, image, date, type = 'website' } = Astro.props;
 
-const resolvedImageWithDomain = new URL(
-  image ?? "/opengraph.jpg",
+const resolvedImageWithDomain = image ?? new URL(
+"/opengraph.webp",
   Astro.site
 ).toString();
 
 
 const makeTitle = title
-  ? title + " | " + "Efobi Dev"
-  : "Efobi Dev. Design Driven Development Agency";
+  ? title + " | " + "efobi.dev"
+  : "efobi.dev. Design Driven Development Agency";
 ---
 
 <html lang="en">
@@ -32,6 +35,7 @@ const makeTitle = title
 		<link rel="icon" type="image/png" href="/favicon.png" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
+        <ClientRouter />
 		<SEO title={makeTitle} description={description} canonical={canonicalURL} twitter={{
             creator: '@owenEEfobi',
             site: '@owenEEfobi',
@@ -39,7 +43,7 @@ const makeTitle = title
         }}
         openGraph={{
             basic: {
-            title: 'Efobi Dev. Design Driven Development Agency',
+            title: 'efobi.dev. Design Driven Development Agency',
             url: canonicalURL,
             type,
             image: resolvedImageWithDomain
@@ -54,13 +58,15 @@ const makeTitle = title
           image: resolvedImageWithDomain,
         },
         image: {
-          alt: "Efobi Dev. Design Driven Development Agency",
+          alt: "efobi.dev. Design Driven Development Agency",
         },
       }} />
 	</head>
 	<body class="min-h-screen flex flex-col">
         <Header client:load />
 		<slot />
+        <Footer client:load/>
+        <Toaster richColors client:load />
         <style is:global>
       /* Improve Page speed */
       /* https://css-tricks.com/almanac/properties/c/content-visibility/ */

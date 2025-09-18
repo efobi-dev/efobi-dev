@@ -31,7 +31,7 @@ export function Header() {
 
 	if (isMobile) {
 		return (
-			<header className="fixed top-0 pt-2 flex items-center justify-between gap-2 px-4 w-full z-10">
+			<header className="fixed top-0 pt-2 flex items-center justify-between gap-2 px-4 w-full z-50">
 				<div className="bg-primary/30 backdrop-blur-md rounded-full shadow-lg border border-border p-2">
 					<Logo />
 				</div>
