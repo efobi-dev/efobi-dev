@@ -9,16 +9,19 @@ export default defineType({
 			name: "clientName",
 			title: "Client Name",
 			type: "string",
+			validation: (Rule) => Rule.required(),
 		}),
 		defineField({
 			name: "clientTitleAndCompany",
 			title: "Client Title/Company",
 			type: "string",
+			validation: (Rule) => Rule.required(),
 		}),
 		defineField({
 			name: "quote",
 			title: "Quote",
 			type: "text",
+			validation: (Rule) => Rule.required(),
 		}),
 	],
 });

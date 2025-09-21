@@ -8,8 +8,8 @@ export function Logo({
 	hideMark?: boolean;
 }) {
 	return (
-		<h1 className={cn("font-[logo] text-nowrap font-semibold", className)}>
+		<span className={cn("font-[logo] text-nowrap font-semibold", className)}>
 			<a href={"/"}>efobi.dev {hideMark ? null : <sup>&reg;</sup>}</a>
-		</h1>
+		</span>
 	);
 }

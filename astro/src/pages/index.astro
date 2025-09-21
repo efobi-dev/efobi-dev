@@ -2,10 +2,18 @@
 import { StartButton } from "@/components/start"
 import Layout from "./layouts/Layout.astro"
 import { ChevronDown } from "lucide-react"
+import { LogoSection } from "@/components/home/logo-section"
+import { Logo } from "@/components/logo"
+import { runQuery, getSomeCaseStudiesQuery } from "@/sanity/queries"
+import { CaseStudies } from "@/components/home/case-studies"
+import {Separator} from "@/components/ui/separator"
+
+const caseStudies = await runQuery(getSomeCaseStudiesQuery());
 ---
 
 <Layout title="Home">
-  <section class="min-h-screen p-8 flex flex-col items-center justify-center">
+  <div class="relative">
+  <section class="sticky top-0 h-screen p-8 flex flex-col items-center justify-center">
     <!-- Mobile Layout: Stack vertically -->
     <div class="w-full max-w-[1400px] md:hidden flex flex-col items-center justify-center min-h-[80vh] gap-16 text-center">
       <div class="flex items-center justify-center">
@@ -15,7 +23,7 @@ import { ChevronDown } from "lucide-react"
       </div>
       <div class="flex flex-col items-center gap-8">
         <p class="text-lg leading-relaxed text-accent-foreground m-0 max-w-sm">
-          At <span class="font-semibold">efobi.dev</span>, we specialize <br /> in building digital products that <br /> feel as good as they look.
+          At <Logo /> we specialize <br /> in building digital products that <br /> feel as good as they look.
         </p>
         <StartButton client:load />
       </div>
@@ -30,7 +38,7 @@ import { ChevronDown } from "lucide-react"
       </div>
       <div class="col-start-2 row-start-2 flex flex-col justify-end items-end text-right gap-8">
         <p class="text-lg leading-relaxed text-accent-foreground m-0 max-w-sm">
-          At <span class="font-semibold">efobi.dev</span>, we specialize <br /> in building digital products that <br /> feel as good as they look.
+          At <Logo /> we specialize <br /> in building digital products that <br /> feel as good as they look.
         </p>
         <StartButton client:load />
       </div>
@@ -39,4 +47,10 @@ import { ChevronDown } from "lucide-react"
 		<ChevronDown className="animate-bounce text-accent-foreground mx-auto md:hidden" />
 	</span>
   </section>
+  <section class="sticky top-0 min-h-screen flex flex-col bg-background text-foreground">
+    <LogoSection client:load />
+    <Separator className="w-full" />
+    <CaseStudies caseStudies={caseStudies} client:load />
+  </section>
+</div>
 </Layout>

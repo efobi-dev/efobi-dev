@@ -9,6 +9,7 @@ export default defineType({
 			name: "title",
 			title: "Title",
 			type: "string",
+			validation: (Rule) => Rule.required(),
 		}),
 		defineField({
 			name: "slug",
@@ -18,11 +19,18 @@ export default defineType({
 				source: "title",
 				maxLength: 96,
 			},
+			validation: (Rule) => Rule.required(),
 		}),
 		defineField({
 			name: "client",
 			title: "Client",
 			type: "string",
+			validation: (Rule) => Rule.required(),
+		}),
+		defineField({
+			name: "clientProfile",
+			title: "Client Profile",
+			type: "blockContent",
 		}),
 		defineField({
 			name: "mainImage",
@@ -31,33 +39,45 @@ export default defineType({
 			options: {
 				hotspot: true,
 			},
+			validation: (Rule) => Rule.required(),
 		}),
 		defineField({
 			name: "projectOverview",
 			title: "Project Overview",
 			type: "text",
+			validation: (Rule) => Rule.required(),
 		}),
 		defineField({
 			name: "theChallenge",
 			title: "The Challenge",
 			type: "blockContent",
+			validation: (Rule) => Rule.required(),
 		}),
 		defineField({
 			name: "myRole",
 			title: "My Role",
 			type: "array",
 			of: [{ type: "string" }],
+			validation: (Rule) => Rule.required(),
 		}),
 		defineField({
 			name: "theProcessAndSolution",
 			title: "The Process & Solution",
 			type: "blockContent",
+			validation: (Rule) => Rule.required(),
+		}),
+		defineField({
+			name: "results",
+			title: "Results",
+			type: "blockContent",
+			validation: (Rule) => Rule.required(),
 		}),
 		defineField({
 			name: "technologiesUsed",
 			title: "Technologies Used",
 			type: "array",
 			of: [{ type: "reference", to: { type: "technology" } }],
+			validation: (Rule) => Rule.required(),
 		}),
 		defineField({
 			name: "liveUrl",

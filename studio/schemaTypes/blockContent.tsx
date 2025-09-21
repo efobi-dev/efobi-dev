@@ -21,6 +21,17 @@ export default defineType({
 				decorators: [
 					{ title: "Strong", value: "strong" },
 					{ title: "Emphasis", value: "em" },
+					{ title: "Code", value: "code" },
+					{
+						title: "Highlight",
+						value: "highlight",
+						icon: () => <span style={{ fontWeight: "bold" }}>H</span>,
+						component: (props) => (
+							<span style={{ backgroundColor: "yellow" }}>
+								{props.children}
+							</span>
+						),
+					},
 				],
 				annotations: [
 					{
@@ -41,6 +52,27 @@ export default defineType({
 		defineArrayMember({
 			type: "image",
 			options: { hotspot: true },
+		}),
+		defineArrayMember({
+			name: "alert",
+			type: "object",
+			fields: [
+				{
+					name: "type",
+					type: "string",
+					options: {
+						list: [
+							{ title: "Info", value: "info" },
+							{ title: "Warning", value: "warning" },
+							{ title: "Danger", value: "danger" },
+						],
+					},
+				},
+				{
+					name: "message",
+					type: "text",
+				},
+			],
 		}),
 	],
 });

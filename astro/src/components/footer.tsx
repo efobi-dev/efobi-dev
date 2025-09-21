@@ -53,7 +53,7 @@ export function Footer() {
 				<div className="w-full min-h-[100dvh] flex flex-col p-6 md:p-12">
 					{/* Header Section */}
 					<div className="flex flex-col items-center text-center mb-12 md:mb-16">
-						<h2 className="text-4xl md:text-6xl lg:text-7xl leading-tight font-bold mb-4">
+						<h2 className="text-4xl md:text-6xl lg:text-7xl leading-tight font-semibold mb-4">
 							Connect with us.
 						</h2>
 						<p className="mx-auto max-w-3xl text-base md:text-lg leading-relaxed text-muted-foreground">

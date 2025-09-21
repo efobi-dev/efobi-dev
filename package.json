@@ -1,4 +1,5 @@
 {
+	"name": "efobi-dev",
 	"dependencies": {},
 	"scripts": {
 		"format": "biome check --write"

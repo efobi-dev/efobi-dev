@@ -1,5 +1,5 @@
 {
-	"name": "efobi-dev",
+	"name": "@efobi-dev/studio",
 	"private": true,
 	"version": "1.0.0",
 	"main": "package.json",
@@ -10,6 +10,7 @@
 		"build": "sanity build",
 		"deploy": "sanity deploy",
 		"format": "biome check --write",
+		"sanity:typegen": "sanity schema extract --path './sanity/schema.json' --enforce-required-fields && sanity typegen generate",
 		"deploy-graphql": "sanity graphql deploy"
 	},
 	"keywords": [

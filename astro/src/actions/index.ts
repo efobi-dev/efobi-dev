@@ -1,13 +1,14 @@
 import { defineAction } from "astro:actions";
 import { Mailer } from "@efobi/mailer";
+import { env } from "@/lib/env";
 import { contactFormSchema } from "@/lib/zod";
 
 const mailer = new Mailer({
 	auth: {
-		user: import.meta.env.SMTP_EMAIL,
-		pass: import.meta.env.SMTP_API_KEY,
+		user: env.SMTP_EMAIL,
+		pass: env.SMTP_API_KEY,
 	},
-	host: import.meta.env.SMTP_SERVER,
+	host: env.SMTP_SERVER,
 });
 
 export const server = {

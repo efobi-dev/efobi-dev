@@ -9,6 +9,7 @@ export default defineType({
 			name: "title",
 			title: "Title",
 			type: "string",
+			validation: (Rule) => Rule.required(),
 		}),
 		defineField({
 			name: "slug",
@@ -18,11 +19,13 @@ export default defineType({
 				source: "title",
 				maxLength: 96,
 			},
+			validation: (Rule) => Rule.required(),
 		}),
 		defineField({
 			name: "publishedDate",
 			title: "Published Date",
 			type: "datetime",
+			validation: (Rule) => Rule.required(),
 		}),
 		defineField({
 			name: "mainImage",
@@ -31,22 +34,26 @@ export default defineType({
 			options: {
 				hotspot: true,
 			},
+			validation: (Rule) => Rule.required(),
 		}),
 		defineField({
 			name: "excerpt",
 			title: "Excerpt",
 			type: "text",
+			validation: (Rule) => Rule.required(),
 		}),
 		defineField({
 			name: "body",
 			title: "Body",
 			type: "blockContent",
+			validation: (Rule) => Rule.required(),
 		}),
 		defineField({
 			name: "author",
 			title: "Author",
 			type: "reference",
 			to: { type: "author" },
+			validation: (Rule) => Rule.required(),
 		}),
 	],
 
