@@ -98,6 +98,7 @@ const LetterSwapForward = ({
 				return (
 					<span
 						className="whitespace-pre relative flex"
+						// biome-ignore lint/suspicious/noArrayIndexKey: <index used for iteration>
 						key={i}
 						aria-hidden={true}
 					>

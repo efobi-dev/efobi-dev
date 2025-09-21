@@ -36,6 +36,7 @@ export const TextGenerateEffect = ({
 				{wordsArray.map((word, idx) => {
 					return (
 						<motion.span
+							// biome-ignore lint/suspicious/noArrayIndexKey: <index used for iteration>
 							key={word + idx}
 							className="dark:text-white text-black opacity-0"
 							style={{

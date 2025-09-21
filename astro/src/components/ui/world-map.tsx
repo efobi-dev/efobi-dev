@@ -89,13 +89,17 @@ export default function WorldMap({
 									delay: 0.5 * i,
 									ease: "easeOut",
 								}}
-								key={`start-upper-${i}`}
+								key={`start-upper-${
+									// biome-ignore lint/suspicious/noArrayIndexKey: <index used for iteration>
+									i
+								}`}
 							></motion.path>
 						</g>
 					);
 				})}
 
 				<defs>
+					{/** biome-ignore lint/correctness/useUniqueElementIds: <this is fine> */}
 					<linearGradient id="path-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
 						<stop offset="0%" stopColor="white" stopOpacity="0" />
 						<stop offset="5%" stopColor={lineColor} stopOpacity="1" />
@@ -105,8 +109,18 @@ export default function WorldMap({
 				</defs>
 
 				{dots.map((dot, i) => (
-					<g key={`points-group-${i}`}>
-						<g key={`start-${i}`}>
+					<g
+						key={`points-group-${
+							// biome-ignore lint/suspicious/noArrayIndexKey: <index used for iteration>
+							i
+						}`}
+					>
+						<g
+							key={`start-${
+								// biome-ignore lint/suspicious/noArrayIndexKey: <index used for iteration>
+								i
+							}`}
+						>
 							<circle
 								cx={projectPoint(dot.start.lat, dot.start.lng).x}
 								cy={projectPoint(dot.start.lat, dot.start.lng).y}

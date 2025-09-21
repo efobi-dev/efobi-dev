@@ -1,6 +1,6 @@
+import { motion } from "motion/react";
 import Gravity, { MatterBody } from "../ui/gravity";
 import { ContactForm } from "./form";
-import { motion } from "motion/react";
 
 export function ContactSection() {
 	const socialLinks = [

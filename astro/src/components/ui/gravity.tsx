@@ -27,7 +27,7 @@ const loadMatter = async () => {
 		try {
 			const polyDecomp = await import("poly-decomp");
 			matter.Common.setDecomp(polyDecomp);
-		} catch (e) {
+		} catch (_e) {
 			console.warn("poly-decomp not available, complex shapes may not work");
 		}
 	}
@@ -407,8 +407,8 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
 			}
 
 			const touchingMouse = () =>
-				matter!.Query.point(
-					engine.current!.world.bodies,
+				matter?.Query.point(
+					engine.current?.world.bodies,
 					mouseConstraint.current?.mouse.position || { x: 0, y: 0 },
 				).length > 0;
 
@@ -556,7 +556,7 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
 			stopEngine();
 			bodiesMap.current.forEach(({ element, body, props }) => {
 				const angle = (props.angle || 0) * (Math.PI / 180);
-				matter!.Body.setAngle(body, angle);
+				matter?.Body.setAngle(body, angle);
 
 				const x = calculatePosition(
 					props.x,
@@ -568,9 +568,9 @@ const Gravity = forwardRef<GravityRef, GravityProps>(
 					canvasSize.height,
 					element.offsetHeight,
 				);
-				matter!.Body.setPosition(body, { x, y });
-				matter!.Body.setVelocity(body, { x: 0, y: 0 });
-				matter!.Body.setAngularVelocity(body, 0);
+				matter?.Body.setPosition(body, { x, y });
+				matter?.Body.setVelocity(body, { x: 0, y: 0 });
+				matter?.Body.setAngularVelocity(body, 0);
 			});
 			updateElements();
 		}, [canvasSize, stopEngine, updateElements]);

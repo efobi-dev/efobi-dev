@@ -4,11 +4,17 @@ import Layout from "./layouts/Layout.astro"
 import { ChevronDown } from "lucide-react"
 import { LogoSection } from "@/components/home/logo-section"
 import { Logo } from "@/components/logo"
-import { runQuery, getSomeCaseStudiesQuery } from "@/sanity/queries"
+import { runQuery, getSomeCaseStudiesQuery, getAllServicesQuery } from "@/sanity/queries"
 import { CaseStudies } from "@/components/home/case-studies"
 import {Separator} from "@/components/ui/separator"
+import { ServicesSection } from "@/components/home/services"
+import { CallToActionSection } from "@/components/home/cta"
+import { FAQSection } from "@/components/home/faq"
 
-const caseStudies = await runQuery(getSomeCaseStudiesQuery());
+const [caseStudies, services] = await Promise.all([
+  runQuery(getSomeCaseStudiesQuery()),
+  runQuery(getAllServicesQuery)
+]);
 ---
 
 <Layout title="Home">
@@ -51,6 +57,10 @@ const caseStudies = await runQuery(getSomeCaseStudiesQuery());
     <LogoSection client:load />
     <Separator className="w-full" />
     <CaseStudies caseStudies={caseStudies} client:load />
+    <ServicesSection services={services} client:load />
+    <CallToActionSection client:load />
+    <Separator className="w-full" />
+    <FAQSection client:load />
   </section>
 </div>
 </Layout>
