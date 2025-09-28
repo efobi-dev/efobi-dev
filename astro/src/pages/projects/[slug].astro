@@ -1,0 +1,21 @@
+---
+export const prerender = false
+const {slug} = Astro.params
+import CustomPortableText from "@/components/CustomPortableText.astro"
+import Layout from "../layouts/Layout.astro"
+import {runQuery, getCaseStudy} from '@/sanity/queries'
+
+if (!slug) {
+    return Astro.redirect('/projects')
+}
+
+const [caseStudy] = await runQuery(getCaseStudy, {parameters: {slug}})
+---
+
+<Layout title={caseStudy.title} description={`Case study about ${caseStudy.client}`} image={caseStudy.mainImage!} type="article" date={caseStudy._updatedAt}>
+    <article class="prose">
+        <h1>{caseStudy.title}</h1>
+        <p>Client: {caseStudy.client}</p>
+        {caseStudy.clientProfile && <CustomPortableText value={caseStudy.clientProfile} />}
+    </article>
+</Layout>

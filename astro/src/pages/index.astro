@@ -4,7 +4,7 @@ import Layout from "./layouts/Layout.astro"
 import { ChevronDown } from "lucide-react"
 import { LogoSection } from "@/components/home/logo-section"
 import { Logo } from "@/components/logo"
-import { runQuery, getSomeCaseStudiesQuery, getAllServicesQuery } from "@/sanity/queries"
+import { runQuery, getAllCaseStudiesQuery, getAllServicesQuery } from "@/sanity/queries"
 import { CaseStudies } from "@/components/home/case-studies"
 import {Separator} from "@/components/ui/separator"
 import { ServicesSection } from "@/components/home/services"
@@ -12,7 +12,7 @@ import { CallToActionSection } from "@/components/home/cta"
 import { FAQSection } from "@/components/home/faq"
 
 const [caseStudies, services] = await Promise.all([
-  runQuery(getSomeCaseStudiesQuery()),
+  runQuery(getAllCaseStudiesQuery),
   runQuery(getAllServicesQuery)
 ]);
 ---

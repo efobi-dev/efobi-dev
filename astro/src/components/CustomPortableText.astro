@@ -1,0 +1,43 @@
+---
+import { PortableText } from "astro-portabletext";
+import { cn } from "@/lib/utils";
+
+import H1 from "./portable-text/H1.astro";
+import H2 from "./portable-text/H2.astro";
+import H3 from "./portable-text/H3.astro";
+import H4 from "./portable-text/H4.astro";
+import Blockquote from "./portable-text/Blockquote.astro";
+import MarkStrong from "./portable-text/MarkStrong.astro";
+import MarkEm from "./portable-text/MarkEm.astro";
+import MarkCode from "./portable-text/MarkCode.astro";
+import MarkHighlight from "./portable-text/MarkHighlight.astro";
+import MarkLink from "./portable-text/MarkLink.astro";
+import SanityImage from "./portable-text/SanityImage.astro";
+import Alert from "./portable-text/Alert.astro";
+
+const { value, className } = Astro.props;
+
+const components = {
+    block: {
+        h1: H1,
+        h2: H2,
+        h3: H3,
+        h4: H4,
+        blockquote: Blockquote,
+    },
+    mark: {
+        strong: MarkStrong,
+        em: MarkEm,
+        code: MarkCode,
+        highlight: MarkHighlight,
+        link: MarkLink,
+    },
+    type: {
+        image: SanityImage,
+        alert: Alert,
+    },
+};
+---
+<div class={cn("prose prose-gray max-w-none dark:prose-invert lg:prose-lg", className)}>
+    <PortableText components={components} value={value} />
+</div>
