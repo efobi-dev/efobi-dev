@@ -3,9 +3,9 @@ export const prerender = false;
 const { slug } = Astro.params;
 
 import CustomPortableText from "@/components/CustomPortableText.astro";
-import Layout from "../layouts/Layout.astro";
-import { getBlogPost, runQuery } from "@/sanity/queries";
 import { formatDate } from "@/lib/helpers";
+import { getBlogPost, runQuery } from "@/sanity/queries";
+import Layout from "../layouts/Layout.astro";
 
 if (!slug) {
 	return Astro.redirect("/blog");

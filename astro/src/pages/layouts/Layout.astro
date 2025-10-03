@@ -19,11 +19,15 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
 const { title, description, image, date, type = "website" } = Astro.props;
 
 const resolvedImageWithDomain =
-	image ?? new URL("/placeholder.webp", Astro.site).toString();
+	image ?? new URL("/placeholder.png", Astro.site).toString();
 
 const makeTitle = title
 	? `${title} | efobi.dev`
 	: "efobi.dev. Design Driven Development Agency";
+
+const makeDescription = description
+	? description
+	: "efobi.dev is a design-driven development agency that crafts beautiful, high-performance websites and applications tailored to your business needs.";
 ---
 
 <html lang="en">
@@ -33,7 +37,7 @@ const makeTitle = title
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
         <ClientRouter />
-		<SEO title={makeTitle} description={description} canonical={canonicalURL} twitter={{
+		<SEO title={makeTitle} description={makeDescription} canonical={canonicalURL} twitter={{
             creator: '@owenEEfobi',
             site: '@owenEEfobi',
             card: 'summary_large_image',
@@ -41,6 +45,7 @@ const makeTitle = title
         openGraph={{
             basic: {
             title: 'efobi.dev. Design Driven Development Agency',
+            description: makeDescription,
             url: canonicalURL,
             type,
             image: resolvedImageWithDomain

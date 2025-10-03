@@ -18,7 +18,7 @@ export function CaseStudies({
 	const images: CarouselItem[] = caseStudies.map((c) => ({
 		id: c._id,
 		type: "image",
-		src: c.mainImage ?? "/placeholder.webp",
+		src: c.mainImage ?? "/placeholder.png",
 		alt: c.title,
 	}));
 	const isMobile = useMediaQuery("(max-width: 768px)");
