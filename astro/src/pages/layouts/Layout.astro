@@ -41,28 +41,20 @@ const makeDescription = description
             creator: '@owenEEfobi',
             site: '@owenEEfobi',
             card: 'summary_large_image',
+            image: resolvedImageWithDomain,
+            imageAlt: makeDescription,
+            title: makeTitle,
+            description: makeDescription,
         }}
         openGraph={{
             basic: {
             title: 'efobi.dev. Design Driven Development Agency',
-            description: makeDescription,
             url: canonicalURL,
             type,
             image: resolvedImageWithDomain
             },
             article: date ? { publishedTime: new Date(date).toISOString() } : undefined,
-        }}
-        openGraph={{
-        basic: {
-          url: canonicalURL,
-          type,
-          title: makeTitle,
-          image: resolvedImageWithDomain,
-        },
-        image: {
-          alt: "efobi.dev. Design Driven Development Agency",
-        },
-      }} />
+        }} />
 	</head>
 	<body>
         <Header client:load />
