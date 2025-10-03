@@ -1,0 +1,39 @@
+---
+import { Logo } from "@/components/logo";
+import { CaseStudyCard } from "@/components/projects/case-study";
+import { getAllCaseStudiesQuery, runQuery } from "@/sanity/queries";
+import Layout from "../layouts/Layout.astro";
+
+const caseStudies = await runQuery(getAllCaseStudiesQuery);
+---
+
+<Layout title="Case Studies">
+ <div class="flex flex-col">
+			<section class="py-16 sm:py-20 lg:py-24 min-h-screen grid place-items-center">
+				<div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+					<div class="flex flex-col items-center text-center gap-6 sm:gap-8">
+						<h2 class="text-4xl sm:text-5xl lg:text-7xl xl:text-8xl font-semibold leading-none tracking-tight max-w-5xl">
+							See how leading companies
+							<br />
+							<span class="block">
+								thrive with <Logo hideMark={false} />
+							</span>
+						</h2>
+
+						<p class="max-w-3xl text-lg sm:text-xl lg:text-2xl leading-relaxed font-light mt-4">
+							Trusted by hundreds of organizations,
+							<br class="hidden sm:block" />
+							from ambitious startups to global enterprises.
+						</p>
+					</div>
+				</div>
+			</section>
+			<section class="border-t border-dotted border-gray-300 bg-background text-foreground">
+				<div class="grid lg:grid-cols-2">
+					{caseStudies.map((caseStudy) => (
+						<CaseStudyCard caseStudy={caseStudy} />
+					))}
+				</div>
+			</section>
+		</div>
+</Layout>

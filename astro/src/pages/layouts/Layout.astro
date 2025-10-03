@@ -1,0 +1,90 @@
+---
+import "../../styles/global.css";
+import "../../styles/main.css";
+import { ClientRouter } from "astro:transitions";
+import { SEO } from "astro-seo";
+import { Toaster } from "sonner";
+import { Footer } from "@/components/footer";
+import { Header } from "@/components/header";
+
+export interface Props {
+	title: string;
+	description?: string;
+	image?: string;
+	date?: string;
+	type?: "website" | "article";
+}
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
+const { title, description, image, date, type = "website" } = Astro.props;
+
+const resolvedImageWithDomain =
+	image ?? new URL("/placeholder.webp", Astro.site).toString();
+
+const makeTitle = title
+	? `${title} | efobi.dev`
+	: "efobi.dev. Design Driven Development Agency";
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/png" href="/favicon.png" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+        <ClientRouter />
+		<SEO title={makeTitle} description={description} canonical={canonicalURL} twitter={{
+            creator: '@owenEEfobi',
+            site: '@owenEEfobi',
+            card: 'summary_large_image',
+        }}
+        openGraph={{
+            basic: {
+            title: 'efobi.dev. Design Driven Development Agency',
+            url: canonicalURL,
+            type,
+            image: resolvedImageWithDomain
+            },
+            article: date ? { publishedTime: new Date(date).toISOString() } : undefined,
+        }}
+        openGraph={{
+        basic: {
+          url: canonicalURL,
+          type,
+          title: makeTitle,
+          image: resolvedImageWithDomain,
+        },
+        image: {
+          alt: "efobi.dev. Design Driven Development Agency",
+        },
+      }} />
+	</head>
+	<body>
+        <Header client:load />
+		<slot />
+        <Footer client:load/>
+        <Toaster richColors client:load />
+        <style is:global>
+      /* Improve Page speed */
+      /* https://css-tricks.com/almanac/properties/c/content-visibility/ */
+      img {
+        content-visibility: auto;
+      }
+
+      @keyframes slide-from-right {
+        from { transform: translateX(30px); opacity: 0; }
+      }
+
+      @keyframes slide-to-left {
+        to { transform: translateX(-30px); opacity: 0; }
+      }
+
+      ::view-transition-old(root) {
+        animation: 180ms cubic-bezier(0.4, 0, 1, 1) both slide-to-left;
+      }
+      ::view-transition-new(root) {
+        animation: 180ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
+      }
+    </style>
+	</body>
+</html>

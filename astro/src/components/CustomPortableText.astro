@@ -1,0 +1,28 @@
+---
+import { PortableText } from "astro-portabletext";
+import { cn } from "@/lib/utils";
+import Alert from "./portable-text/Alert.astro";
+import Blockquote from "./portable-text/Blockquote.astro";
+import MarkCode from "./portable-text/MarkCode.astro";
+import MarkHighlight from "./portable-text/MarkHighlight.astro";
+import SanityImage from "./portable-text/SanityImage.astro";
+
+const { value, className } = Astro.props;
+
+const components = {
+	block: {
+		blockquote: Blockquote,
+	},
+	mark: {
+		code: MarkCode,
+		highlight: MarkHighlight,
+	},
+	type: {
+		image: SanityImage,
+		alert: Alert,
+	},
+};
+---
+<div class={cn("prose prose-blue max-w-none dark:prose-invert lg:prose-lg", className)}>
+    <PortableText components={components} value={value} />
+</div>
