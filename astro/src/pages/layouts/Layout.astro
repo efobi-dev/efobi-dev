@@ -1,32 +1,29 @@
 ---
 import "../../styles/global.css";
 import "../../styles/main.css";
-import {SEO} from 'astro-seo'
-import { Header } from "@/components/header";
 import { ClientRouter } from "astro:transitions";
+import { SEO } from "astro-seo";
+import { Toaster } from "sonner";
 import { Footer } from "@/components/footer";
-import {Toaster} from 'sonner'
+import { Header } from "@/components/header";
 
 export interface Props {
-  title: string;
-  description?: string;
-  image?: string;
-  date?: string;
-  type?: "website" | "article";
+	title: string;
+	description?: string;
+	image?: string;
+	date?: string;
+	type?: "website" | "article";
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
-const { title, description, image, date, type = 'website' } = Astro.props;
+const { title, description, image, date, type = "website" } = Astro.props;
 
-const resolvedImageWithDomain = image ?? new URL(
-"/opengraph.webp",
-  Astro.site
-).toString();
-
+const resolvedImageWithDomain =
+	image ?? new URL("/placeholder.webp", Astro.site).toString();
 
 const makeTitle = title
-  ? title + " | " + "efobi.dev"
-  : "efobi.dev. Design Driven Development Agency";
+	? `${title} | efobi.dev`
+	: "efobi.dev. Design Driven Development Agency";
 ---
 
 <html lang="en">
@@ -62,7 +59,7 @@ const makeTitle = title
         },
       }} />
 	</head>
-	<body class="min-h-screen flex flex-col">
+	<body>
         <Header client:load />
 		<slot />
         <Footer client:load/>
@@ -72,6 +69,21 @@ const makeTitle = title
       /* https://css-tricks.com/almanac/properties/c/content-visibility/ */
       img {
         content-visibility: auto;
+      }
+
+      @keyframes slide-from-right {
+        from { transform: translateX(30px); opacity: 0; }
+      }
+
+      @keyframes slide-to-left {
+        to { transform: translateX(-30px); opacity: 0; }
+      }
+
+      ::view-transition-old(root) {
+        animation: 180ms cubic-bezier(0.4, 0, 1, 1) both slide-to-left;
+      }
+      ::view-transition-new(root) {
+        animation: 180ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
       }
     </style>
 	</body>

@@ -1,24 +1,24 @@
 ---
-import { AlertTriangle, Info, AlertCircle } from "lucide-react";
+import { AlertCircle, AlertTriangle, Info } from "lucide-react";
 
 const { node } = Astro.props;
 
 const alertConfig = {
-    info: {
-        Icon: Info,
-        style: "bg-blue-100 border-blue-500 text-blue-700",
-        iconClass: "text-blue-500",
-    },
-    warning: {
-        Icon: AlertTriangle,
-        style: "bg-yellow-100 border-yellow-500 text-yellow-700",
-        iconClass: "text-yellow-500",
-    },
-    danger: {
-        Icon: AlertCircle,
-        style: "bg-red-100 border-red-500 text-red-700",
-        iconClass: "text-red-500",
-    },
+	info: {
+		Icon: Info,
+		style: "bg-blue-100 border-blue-500 text-blue-700",
+		iconClass: "text-blue-500",
+	},
+	warning: {
+		Icon: AlertTriangle,
+		style: "bg-yellow-100 border-yellow-500 text-yellow-700",
+		iconClass: "text-yellow-500",
+	},
+	danger: {
+		Icon: AlertCircle,
+		style: "bg-red-100 border-red-500 text-red-700",
+		iconClass: "text-red-500",
+	},
 };
 
 const { Icon, style, iconClass } = alertConfig[node.type];

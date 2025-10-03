@@ -1,21 +1,118 @@
 ---
-export const prerender = false
-const {slug} = Astro.params
-import CustomPortableText from "@/components/CustomPortableText.astro"
-import Layout from "../layouts/Layout.astro"
-import {runQuery, getCaseStudy} from '@/sanity/queries'
+export const prerender = false;
+const { slug } = Astro.params;
+
+import { Link } from "lucide-react";
+import CustomPortableText from "@/components/CustomPortableText.astro";
+import { buttonVariants } from "@/components/ui/button";
+import { getCaseStudy, runQuery } from "@/sanity/queries";
+import Layout from "../layouts/Layout.astro";
 
 if (!slug) {
-    return Astro.redirect('/projects')
+	return Astro.redirect("/projects");
 }
 
-const [caseStudy] = await runQuery(getCaseStudy, {parameters: {slug}})
+const [caseStudy] = await runQuery(getCaseStudy, { parameters: { slug } });
+
+if (!caseStudy) {
+	return Astro.redirect("/projects");
+}
 ---
 
-<Layout title={caseStudy.title} description={`Case study about ${caseStudy.client}`} image={caseStudy.mainImage!} type="article" date={caseStudy._updatedAt}>
-    <article class="prose">
-        <h1>{caseStudy.title}</h1>
-        <p>Client: {caseStudy.client}</p>
-        {caseStudy.clientProfile && <CustomPortableText value={caseStudy.clientProfile} />}
-    </article>
+<Layout title={caseStudy.title} description={caseStudy.projectOverview} image={caseStudy.mainImage!} type="article" date={caseStudy._updatedAt}>
+    <section class="min-h-screen">
+        <div class="mx-auto max-w-6xl px-4 py-14 md:py-20">
+            <div class="grid gap-10 md:grid-cols-2 md:items-center">
+                 <div class="space-y-6 md:space-y-8">
+                    <h1 class="text-3xl md:text-5xl font-semibold tracking-tight">{caseStudy.title}</h1>
+                    {Array.isArray(caseStudy.technologiesUsed) && caseStudy.technologiesUsed.length > 0 && (
+                        <div class="space-y-2">
+                             <span class="text-base font-medium text-foreground/70">Tech stack</span>
+                            <ul class="flex flex-wrap gap-2">
+                                {caseStudy.technologiesUsed.map((tech) => (
+                                     <li
+                                         class="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/60 px-4 py-2 text-sm font-medium shadow-sm"
+                                     >
+                                         {tech.logo && (
+                                             <img
+                                                 src={tech.logo}
+                                                 alt={tech.name}
+                                                 class="h-6 w-6 rounded-sm object-contain"
+                                                 loading="lazy"
+                                                 decoding="async"
+                                             />
+                                         )}
+                                        <span>{tech.name}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+                    {caseStudy.liveUrl && (
+                        <div>
+                             <a
+                                 href={caseStudy.liveUrl}
+                                 target="_blank"
+                                 rel="noopener noreferrer"
+                                 referrerpolicy="origin"
+                                 class={buttonVariants({variant: 'outline'})}
+                             >
+                                 View Live Project
+                                 <Link className="ml-2 size-4" />
+                             </a>
+                        </div>
+                    )}
+                </div>
+
+                {caseStudy.mainImage && (
+                    <div class="relative overflow-hidden rounded-xl border border-border bg-background shadow-sm">
+                        <img
+                            src={caseStudy.mainImage}
+                            alt={caseStudy.title}
+                            class="h-full w-full object-cover"
+                            loading="lazy"
+                            decoding="async"
+                        />
+                    </div>
+                )}
+            </div>
+        </div>
+    </section>
+    <section class="bg-background text-foreground">
+  <div class="container mx-auto px-4 py-16 md:py-20 lg:py-24">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16">
+      <aside class="lg:col-span-4 lg:sticky lg:top-8 lg:self-start">
+        <h2 class="text-3xl md:text-4xl font-semibold mb-6 tracking-tight">
+              Client Profile
+            </h2>
+          <CustomPortableText value={caseStudy.clientProfile} />
+      </aside>
+      <div class="lg:col-span-8">
+        <article class="space-y-12">
+          <div class="max-w-3xl">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-6 tracking-tight">
+              The Challenge
+            </h2>
+            <CustomPortableText value={caseStudy.theChallenge} />
+          </div>
+          <div class="max-w-3xl">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-6 tracking-tight">
+              The Process and Solution
+            </h2>
+            <CustomPortableText value={caseStudy.theProcessAndSolution} />
+          </div>
+          <div class="max-w-3xl">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-6 tracking-tight">
+              The Results
+            </h2>
+            <CustomPortableText value={caseStudy.results} />
+          </div>
+          <!-- Add more sections here as needed -->
+          
+        </article>
+      </div>
+      
+    </div>
+  </div>
+</section>
 </Layout>

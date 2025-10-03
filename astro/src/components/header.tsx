@@ -72,7 +72,7 @@ export function Header() {
 					</SheetContent>
 				</Sheet>
 			</header>
-			<header className="hidden fixed top-0 left-0 right-0 z-10 md:flex items-center justify-center pt-2 px-4">
+			<header className="hidden fixed top-0 left-0 right-0 z-50 md:flex items-center justify-center pt-2 px-4">
 				<div className="bg-primary/30 backdrop-blur-md rounded-full shadow-lg border border-border p-2">
 					<Logo />
 				</div>

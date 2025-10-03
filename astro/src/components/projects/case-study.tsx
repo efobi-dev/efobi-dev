@@ -18,7 +18,7 @@ export const CaseStudyCard = ({
 			<div className="p-8 lg:p-12 h-full flex flex-col justify-between min-h-[400px] lg:min-h-[500px] relative overflow-hidden">
 				<div className="absolute inset-0">
 					<img
-						src={caseStudy.mainImage ?? "/placeholder.png"}
+						src={caseStudy.mainImage ?? "/placeholder.webp"}
 						alt=""
 						aria-hidden="true"
 						className="w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-[opacity,transform] duration-700 will-change-transform group-hover:scale-105"

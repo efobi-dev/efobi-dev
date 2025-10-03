@@ -1,0 +1,112 @@
+---
+export const prerender = false;
+const { slug } = Astro.params;
+
+import CustomPortableText from "@/components/CustomPortableText.astro";
+import Layout from "../layouts/Layout.astro";
+import { getBlogPost, runQuery } from "@/sanity/queries";
+import { formatDate } from "@/lib/helpers";
+
+if (!slug) {
+	return Astro.redirect("/blog");
+}
+
+const [blogPost] = await runQuery(getBlogPost, { parameters: { slug } });
+
+if (!blogPost) {
+	return Astro.redirect("/blog");
+}
+---
+
+<Layout title={blogPost.title} description={blogPost.excerpt} image={blogPost.mainImage!} type='article' date={blogPost.publishedDate}>
+    <section class="relative min-h-[200vh] bg-background text-foreground">
+        <div 
+            id="hero-bg" 
+            class="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat" 
+            style={`background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7) 40%, rgba(0, 0, 0, 0.9) 70%, rgb(0, 0, 0) 100%), url(${blogPost.mainImage}); background-size: 250%;`}
+        >
+            <div id="opaque-overlay" class="absolute inset-0 bg-[#d2d6f1] opacity-0"></div>
+        </div>
+
+        <!-- Content Container -->
+        <div class="relative z-10 mx-auto w-full md:max-w-3xl">
+            <div class="min-h-screen flex items-center">
+                <h1 class="text-4xl sm:text-5xl lg:text-7xl xl:text-8xl font-bold leading-none tracking-tight max-w-5xl text-white" 
+                    style="text-shadow: 2px 4px 12px rgba(0, 0, 0, 0.8)">
+                    {blogPost.title}
+                </h1>
+            </div>
+                <article class="px-6 py-12 md:px-12 md:py-16 lg:px-16 lg:py-20">
+                    <div class="mb-8 pb-8 border-b border-border">
+                        <time class="text-sm text-muted-foreground">
+                            {formatDate(blogPost.publishedDate)}
+                        </time>
+                    </div>
+                    <CustomPortableText value={blogPost.body} />
+                </article>
+        </div>
+    </section>
+</Layout>
+
+<script>
+    function initZoomEffect() {
+        const heroBg = document.getElementById('hero-bg');
+        const opaqueOverlay = document.getElementById('opaque-overlay');
+        
+        if (!heroBg) return;
+        const initialZoom = 250;
+        const initialSize = (initialZoom / 100) * heroBg.offsetWidth;
+        
+        function handleScroll() {
+            if (!heroBg) return;
+            const fromTop = window.scrollY;
+            const newSize = initialSize - (fromTop / 3);
+            const docHeight = document.documentElement.scrollHeight;
+            
+            if (newSize > heroBg.offsetWidth) {
+                const blur = 0 + (fromTop / 5);
+                const opacity = 1 - ((fromTop / docHeight) * 1.3);
+
+                heroBg.style.backgroundSize = `${newSize}px`;
+                heroBg.style.filter = `blur(${blur}px)`;
+                heroBg.style.opacity = String(Math.max(0, opacity));
+            }
+        }
+        
+        const isChrome = /Chrome/.test(navigator.userAgent);
+        const isSafari = /Safari/.test(navigator.userAgent);
+
+        if (!isChrome && !isSafari && opaqueOverlay) {
+            opaqueOverlay.style.display = 'block';
+            
+            function handleOpaqueScroll() {
+                if (!opaqueOverlay) return;
+                const opacity = 0 + (window.scrollY / 5000);
+                opaqueOverlay.style.opacity = String(Math.min(1, opacity));
+            }
+            
+            window.addEventListener('scroll', handleOpaqueScroll, { passive: true });
+        } else if (opaqueOverlay) {
+            opaqueOverlay.style.display = 'none';
+        }
+        
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll();
+    }
+    
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initZoomEffect);
+    } else {
+        initZoomEffect();
+    }
+</script>
+
+<style>
+    #hero-bg {
+        transition: background-size 0.1s ease-out, opacity 0.1s ease-out, filter 0.1s ease-out;
+    }
+    
+    section {
+        min-height: 200vh;
+    }
+</style>

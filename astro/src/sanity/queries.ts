@@ -37,6 +37,21 @@ export const getAllServicesQuery = q.star
 		shortDescription: z.string(),
 	}));
 
+export const getAllBlogsQuery = q.star
+	.filterByType("article")
+	.order("publishedDate asc")
+	.project((sub) => ({
+		_id: z.string(),
+		title: z.string(),
+		slug: sub.field("slug.current", z.string()),
+		mainImage: sub
+			.field("mainImage.asset")
+			.deref()
+			.field("url", z.string().url().nullable()),
+		excerpt: z.string(),
+		publishedDate: z.string().datetime(),
+	}));
+
 export const getCaseStudy = q
 	.parameters<{ slug: string }>()
 	.star.filterByType("caseStudy")
@@ -76,5 +91,22 @@ export const getCaseStudy = q
 			})
 			.nullable(true),
 		_updatedAt: z.string().datetime(),
+	}))
+	.slice(0, 1);
+
+export const getBlogPost = q
+	.parameters<{ slug: string }>()
+	.star.filterByType("article")
+	.filterRaw("slug.current == $slug")
+	.project((sub) => ({
+		_id: z.string(),
+		title: z.string(),
+		mainImage: sub
+			.field("mainImage.asset")
+			.deref()
+			.field("url", z.string().url().nullable()),
+		excerpt: z.string(),
+		publishedDate: z.string().datetime(),
+		body: sub.field("body[]"),
 	}))
 	.slice(0, 1);
