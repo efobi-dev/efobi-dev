@@ -30,7 +30,9 @@ export default defineType({
 		defineField({
 			name: "clientProfile",
 			title: "Client Profile",
-			type: "blockContent",
+			type: "array",
+			of: [{ type: "block" }, { type: "image" }],
+			validation: (rule) => rule.required(),
 		}),
 		defineField({
 			name: "mainImage",
@@ -50,8 +52,9 @@ export default defineType({
 		defineField({
 			name: "theChallenge",
 			title: "The Challenge",
-			type: "blockContent",
-			validation: (Rule) => Rule.required(),
+			type: "array",
+			of: [{ type: "block" }, { type: "image" }],
+			validation: (rule) => rule.required(),
 		}),
 		defineField({
 			name: "myRole",
@@ -63,14 +66,16 @@ export default defineType({
 		defineField({
 			name: "theProcessAndSolution",
 			title: "The Process & Solution",
-			type: "blockContent",
-			validation: (Rule) => Rule.required(),
+			type: "array",
+			of: [{ type: "block" }, { type: "image" }],
+			validation: (rule) => rule.required(),
 		}),
 		defineField({
 			name: "results",
 			title: "Results",
-			type: "blockContent",
-			validation: (Rule) => Rule.required(),
+			type: "array",
+			of: [{ type: "block" }, { type: "image" }],
+			validation: (rule) => rule.required(),
 		}),
 		defineField({
 			name: "technologiesUsed",

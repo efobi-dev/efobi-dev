@@ -1,6 +1,5 @@
 import article from "./article";
 import author from "./author";
-import blockContent from "./blockContent";
 import caseStudy from "./caseStudy";
 import service from "./service";
 import technology from "./technology";
@@ -13,5 +12,4 @@ export const schemaTypes = [
 	technology,
 	testimonial,
 	author,
-	blockContent,
 ];

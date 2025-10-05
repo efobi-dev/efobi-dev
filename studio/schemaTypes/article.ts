@@ -45,8 +45,9 @@ export default defineType({
 		defineField({
 			name: "body",
 			title: "Body",
-			type: "blockContent",
-			validation: (Rule) => Rule.required(),
+			type: "array",
+			of: [{ type: "block" }, { type: "image" }],
+			validation: (rule) => rule.required(),
 		}),
 		defineField({
 			name: "author",
