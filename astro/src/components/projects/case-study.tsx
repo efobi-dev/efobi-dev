@@ -19,7 +19,7 @@ export const CaseStudyCard = ({
 				<div className="absolute inset-0">
 					<img
 						src={caseStudy.mainImage ?? "/placeholder.png"}
-						alt=""
+						alt={caseStudy.title}
 						aria-hidden="true"
 						className="w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-[opacity,transform] duration-700 will-change-transform group-hover:scale-105"
 					/>

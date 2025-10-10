@@ -1,15 +1,8 @@
 ---
+export const prerender = false;
+
 import { ArrowUpRight } from "lucide-react";
 import { Logo } from "@/components/logo";
-import { Button } from "@/components/ui/button";
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardFooter,
-	CardHeader,
-	CardTitle,
-} from "@/components/ui/card";
 import { formatDate } from "@/lib/helpers";
 import { getAllBlogsQuery, runQuery } from "@/sanity/queries";
 import Layout from "../layouts/Layout.astro";

@@ -14,435 +14,507 @@
 
 // Source: schema.json
 export type Technology = {
-  _id: string;
-  _type: "technology";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name: string;
-  logo: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
+	_id: string;
+	_type: "technology";
+	_createdAt: string;
+	_updatedAt: string;
+	_rev: string;
+	name: string;
+	logo: {
+		asset?: {
+			_ref: string;
+			_type: "reference";
+			_weak?: boolean;
+			[internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+		};
+		media?: unknown;
+		hotspot?: SanityImageHotspot;
+		crop?: SanityImageCrop;
+		_type: "image";
+	};
 };
 
 export type Service = {
-  _id: string;
-  _type: "service";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  serviceName: string;
-  icon: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  shortDescription: string;
-  detailedDescription: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
+	_id: string;
+	_type: "service";
+	_createdAt: string;
+	_updatedAt: string;
+	_rev: string;
+	serviceName: string;
+	icon: {
+		asset?: {
+			_ref: string;
+			_type: "reference";
+			_weak?: boolean;
+			[internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+		};
+		media?: unknown;
+		hotspot?: SanityImageHotspot;
+		crop?: SanityImageCrop;
+		_type: "image";
+	};
+	shortDescription: string;
+	detailedDescription: Array<{
+		children?: Array<{
+			marks?: Array<string>;
+			text?: string;
+			_type: "span";
+			_key: string;
+		}>;
+		style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+		listItem?: "bullet" | "number";
+		markDefs?: Array<{
+			href?: string;
+			_type: "link";
+			_key: string;
+		}>;
+		level?: number;
+		_type: "block";
+		_key: string;
+	}>;
 };
 
 export type Article = {
-  _id: string;
-  _type: "article";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title: string;
-  slug: Slug;
-  publishedDate: string;
-  mainImage: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  excerpt: string;
-  body: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  } | {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-    _key: string;
-  }>;
-  author: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "author";
-  };
+	_id: string;
+	_type: "article";
+	_createdAt: string;
+	_updatedAt: string;
+	_rev: string;
+	title: string;
+	slug: Slug;
+	publishedDate: string;
+	mainImage: {
+		asset?: {
+			_ref: string;
+			_type: "reference";
+			_weak?: boolean;
+			[internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+		};
+		media?: unknown;
+		hotspot?: SanityImageHotspot;
+		crop?: SanityImageCrop;
+		_type: "image";
+	};
+	excerpt: string;
+	body: Array<
+		| {
+				children?: Array<{
+					marks?: Array<string>;
+					text?: string;
+					_type: "span";
+					_key: string;
+				}>;
+				style?:
+					| "normal"
+					| "h1"
+					| "h2"
+					| "h3"
+					| "h4"
+					| "h5"
+					| "h6"
+					| "blockquote";
+				listItem?: "bullet" | "number";
+				markDefs?: Array<{
+					href?: string;
+					_type: "link";
+					_key: string;
+				}>;
+				level?: number;
+				_type: "block";
+				_key: string;
+		  }
+		| {
+				asset?: {
+					_ref: string;
+					_type: "reference";
+					_weak?: boolean;
+					[internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+				};
+				media?: unknown;
+				hotspot?: SanityImageHotspot;
+				crop?: SanityImageCrop;
+				_type: "image";
+				_key: string;
+		  }
+	>;
+	author: {
+		_ref: string;
+		_type: "reference";
+		_weak?: boolean;
+		[internalGroqTypeReferenceTo]?: "author";
+	};
 };
 
 export type Author = {
-  _id: string;
-  _type: "author";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name: string;
-  profileImage: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  bio?: string;
+	_id: string;
+	_type: "author";
+	_createdAt: string;
+	_updatedAt: string;
+	_rev: string;
+	name: string;
+	profileImage: {
+		asset?: {
+			_ref: string;
+			_type: "reference";
+			_weak?: boolean;
+			[internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+		};
+		media?: unknown;
+		hotspot?: SanityImageHotspot;
+		crop?: SanityImageCrop;
+		_type: "image";
+	};
+	bio?: string;
 };
 
 export type CaseStudy = {
-  _id: string;
-  _type: "caseStudy";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title: string;
-  slug: Slug;
-  client: string;
-  clientProfile: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  } | {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-    _key: string;
-  }>;
-  mainImage: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  projectOverview: string;
-  theChallenge: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  } | {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-    _key: string;
-  }>;
-  myRole: Array<string>;
-  theProcessAndSolution: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  } | {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-    _key: string;
-  }>;
-  results: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  } | {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-    _key: string;
-  }>;
-  technologiesUsed: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "technology";
-  }>;
-  liveUrl?: string;
-  testimonial?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "testimonial";
-  };
+	_id: string;
+	_type: "caseStudy";
+	_createdAt: string;
+	_updatedAt: string;
+	_rev: string;
+	title: string;
+	slug: Slug;
+	client: string;
+	clientProfile: Array<
+		| {
+				children?: Array<{
+					marks?: Array<string>;
+					text?: string;
+					_type: "span";
+					_key: string;
+				}>;
+				style?:
+					| "normal"
+					| "h1"
+					| "h2"
+					| "h3"
+					| "h4"
+					| "h5"
+					| "h6"
+					| "blockquote";
+				listItem?: "bullet" | "number";
+				markDefs?: Array<{
+					href?: string;
+					_type: "link";
+					_key: string;
+				}>;
+				level?: number;
+				_type: "block";
+				_key: string;
+		  }
+		| {
+				asset?: {
+					_ref: string;
+					_type: "reference";
+					_weak?: boolean;
+					[internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+				};
+				media?: unknown;
+				hotspot?: SanityImageHotspot;
+				crop?: SanityImageCrop;
+				_type: "image";
+				_key: string;
+		  }
+	>;
+	mainImage: {
+		asset?: {
+			_ref: string;
+			_type: "reference";
+			_weak?: boolean;
+			[internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+		};
+		media?: unknown;
+		hotspot?: SanityImageHotspot;
+		crop?: SanityImageCrop;
+		_type: "image";
+	};
+	projectOverview: string;
+	theChallenge: Array<
+		| {
+				children?: Array<{
+					marks?: Array<string>;
+					text?: string;
+					_type: "span";
+					_key: string;
+				}>;
+				style?:
+					| "normal"
+					| "h1"
+					| "h2"
+					| "h3"
+					| "h4"
+					| "h5"
+					| "h6"
+					| "blockquote";
+				listItem?: "bullet" | "number";
+				markDefs?: Array<{
+					href?: string;
+					_type: "link";
+					_key: string;
+				}>;
+				level?: number;
+				_type: "block";
+				_key: string;
+		  }
+		| {
+				asset?: {
+					_ref: string;
+					_type: "reference";
+					_weak?: boolean;
+					[internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+				};
+				media?: unknown;
+				hotspot?: SanityImageHotspot;
+				crop?: SanityImageCrop;
+				_type: "image";
+				_key: string;
+		  }
+	>;
+	myRole: Array<string>;
+	theProcessAndSolution: Array<
+		| {
+				children?: Array<{
+					marks?: Array<string>;
+					text?: string;
+					_type: "span";
+					_key: string;
+				}>;
+				style?:
+					| "normal"
+					| "h1"
+					| "h2"
+					| "h3"
+					| "h4"
+					| "h5"
+					| "h6"
+					| "blockquote";
+				listItem?: "bullet" | "number";
+				markDefs?: Array<{
+					href?: string;
+					_type: "link";
+					_key: string;
+				}>;
+				level?: number;
+				_type: "block";
+				_key: string;
+		  }
+		| {
+				asset?: {
+					_ref: string;
+					_type: "reference";
+					_weak?: boolean;
+					[internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+				};
+				media?: unknown;
+				hotspot?: SanityImageHotspot;
+				crop?: SanityImageCrop;
+				_type: "image";
+				_key: string;
+		  }
+	>;
+	results: Array<
+		| {
+				children?: Array<{
+					marks?: Array<string>;
+					text?: string;
+					_type: "span";
+					_key: string;
+				}>;
+				style?:
+					| "normal"
+					| "h1"
+					| "h2"
+					| "h3"
+					| "h4"
+					| "h5"
+					| "h6"
+					| "blockquote";
+				listItem?: "bullet" | "number";
+				markDefs?: Array<{
+					href?: string;
+					_type: "link";
+					_key: string;
+				}>;
+				level?: number;
+				_type: "block";
+				_key: string;
+		  }
+		| {
+				asset?: {
+					_ref: string;
+					_type: "reference";
+					_weak?: boolean;
+					[internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+				};
+				media?: unknown;
+				hotspot?: SanityImageHotspot;
+				crop?: SanityImageCrop;
+				_type: "image";
+				_key: string;
+		  }
+	>;
+	technologiesUsed: Array<{
+		_ref: string;
+		_type: "reference";
+		_weak?: boolean;
+		_key: string;
+		[internalGroqTypeReferenceTo]?: "technology";
+	}>;
+	liveUrl?: string;
+	testimonial?: {
+		_ref: string;
+		_type: "reference";
+		_weak?: boolean;
+		[internalGroqTypeReferenceTo]?: "testimonial";
+	};
 };
 
 export type Testimonial = {
-  _id: string;
-  _type: "testimonial";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  clientName: string;
-  clientTitleAndCompany: string;
-  quote: string;
+	_id: string;
+	_type: "testimonial";
+	_createdAt: string;
+	_updatedAt: string;
+	_rev: string;
+	clientName: string;
+	clientTitleAndCompany: string;
+	quote: string;
 };
 
 export type SanityImagePaletteSwatch = {
-  _type: "sanity.imagePaletteSwatch";
-  background?: string;
-  foreground?: string;
-  population?: number;
-  title?: string;
+	_type: "sanity.imagePaletteSwatch";
+	background?: string;
+	foreground?: string;
+	population?: number;
+	title?: string;
 };
 
 export type SanityImagePalette = {
-  _type: "sanity.imagePalette";
-  darkMuted?: SanityImagePaletteSwatch;
-  lightVibrant?: SanityImagePaletteSwatch;
-  darkVibrant?: SanityImagePaletteSwatch;
-  vibrant?: SanityImagePaletteSwatch;
-  dominant?: SanityImagePaletteSwatch;
-  lightMuted?: SanityImagePaletteSwatch;
-  muted?: SanityImagePaletteSwatch;
+	_type: "sanity.imagePalette";
+	darkMuted?: SanityImagePaletteSwatch;
+	lightVibrant?: SanityImagePaletteSwatch;
+	darkVibrant?: SanityImagePaletteSwatch;
+	vibrant?: SanityImagePaletteSwatch;
+	dominant?: SanityImagePaletteSwatch;
+	lightMuted?: SanityImagePaletteSwatch;
+	muted?: SanityImagePaletteSwatch;
 };
 
 export type SanityImageDimensions = {
-  _type: "sanity.imageDimensions";
-  height: number;
-  width: number;
-  aspectRatio: number;
+	_type: "sanity.imageDimensions";
+	height: number;
+	width: number;
+	aspectRatio: number;
 };
 
 export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x: number;
-  y: number;
-  height: number;
-  width: number;
+	_type: "sanity.imageHotspot";
+	x: number;
+	y: number;
+	height: number;
+	width: number;
 };
 
 export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top: number;
-  bottom: number;
-  left: number;
-  right: number;
+	_type: "sanity.imageCrop";
+	top: number;
+	bottom: number;
+	left: number;
+	right: number;
 };
 
 export type SanityFileAsset = {
-  _id: string;
-  _type: "sanity.fileAsset";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  originalFilename?: string;
-  label?: string;
-  title?: string;
-  description?: string;
-  altText?: string;
-  sha1hash?: string;
-  extension?: string;
-  mimeType?: string;
-  size?: number;
-  assetId?: string;
-  uploadId?: string;
-  path?: string;
-  url?: string;
-  source?: SanityAssetSourceData;
+	_id: string;
+	_type: "sanity.fileAsset";
+	_createdAt: string;
+	_updatedAt: string;
+	_rev: string;
+	originalFilename?: string;
+	label?: string;
+	title?: string;
+	description?: string;
+	altText?: string;
+	sha1hash?: string;
+	extension?: string;
+	mimeType?: string;
+	size?: number;
+	assetId?: string;
+	uploadId?: string;
+	path?: string;
+	url?: string;
+	source?: SanityAssetSourceData;
 };
 
 export type SanityImageAsset = {
-  _id: string;
-  _type: "sanity.imageAsset";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  originalFilename?: string;
-  label?: string;
-  title?: string;
-  description?: string;
-  altText?: string;
-  sha1hash?: string;
-  extension?: string;
-  mimeType?: string;
-  size?: number;
-  assetId?: string;
-  uploadId?: string;
-  path?: string;
-  url?: string;
-  metadata?: SanityImageMetadata;
-  source?: SanityAssetSourceData;
+	_id: string;
+	_type: "sanity.imageAsset";
+	_createdAt: string;
+	_updatedAt: string;
+	_rev: string;
+	originalFilename?: string;
+	label?: string;
+	title?: string;
+	description?: string;
+	altText?: string;
+	sha1hash?: string;
+	extension?: string;
+	mimeType?: string;
+	size?: number;
+	assetId?: string;
+	uploadId?: string;
+	path?: string;
+	url?: string;
+	metadata?: SanityImageMetadata;
+	source?: SanityAssetSourceData;
 };
 
 export type SanityImageMetadata = {
-  _type: "sanity.imageMetadata";
-  location?: Geopoint;
-  dimensions?: SanityImageDimensions;
-  palette?: SanityImagePalette;
-  lqip?: string;
-  blurHash?: string;
-  hasAlpha?: boolean;
-  isOpaque?: boolean;
+	_type: "sanity.imageMetadata";
+	location?: Geopoint;
+	dimensions?: SanityImageDimensions;
+	palette?: SanityImagePalette;
+	lqip?: string;
+	blurHash?: string;
+	hasAlpha?: boolean;
+	isOpaque?: boolean;
 };
 
 export type Geopoint = {
-  _type: "geopoint";
-  lat?: number;
-  lng?: number;
-  alt?: number;
+	_type: "geopoint";
+	lat?: number;
+	lng?: number;
+	alt?: number;
 };
 
 export type Slug = {
-  _type: "slug";
-  current: string;
-  source?: string;
+	_type: "slug";
+	current: string;
+	source?: string;
 };
 
 export type SanityAssetSourceData = {
-  _type: "sanity.assetSourceData";
-  name?: string;
-  id?: string;
-  url?: string;
+	_type: "sanity.assetSourceData";
+	name?: string;
+	id?: string;
+	url?: string;
 };
 
-export type AllSanitySchemaTypes = Technology | Service | Article | Author | CaseStudy | Testimonial | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
+export type AllSanitySchemaTypes =
+	| Technology
+	| Service
+	| Article
+	| Author
+	| CaseStudy
+	| Testimonial
+	| SanityImagePaletteSwatch
+	| SanityImagePalette
+	| SanityImageDimensions
+	| SanityImageHotspot
+	| SanityImageCrop
+	| SanityFileAsset
+	| SanityImageAsset
+	| SanityImageMetadata
+	| Geopoint
+	| Slug
+	| SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;

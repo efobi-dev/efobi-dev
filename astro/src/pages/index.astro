@@ -1,4 +1,6 @@
 ---
+export const prerender = false;
+
 import { ChevronDown } from "lucide-react";
 import { CaseStudies } from "@/components/home/case-studies";
 import { CallToActionSection } from "@/components/home/cta";
@@ -7,11 +9,7 @@ import { LogoSection } from "@/components/home/logo-section";
 import { Logo } from "@/components/logo";
 import { StartButton } from "@/components/start";
 import { Separator } from "@/components/ui/separator";
-import {
-	getAllCaseStudiesQuery,
-	getAllServicesQuery,
-	runQuery,
-} from "@/sanity/queries";
+import { getAllCaseStudiesQuery, runQuery } from "@/sanity/queries";
 import Layout from "./layouts/Layout.astro";
 
 const caseStudies = await runQuery(getAllCaseStudiesQuery);
