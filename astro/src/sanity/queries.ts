@@ -110,3 +110,23 @@ export const getBlogPost = q
 		body: sub.field("body[]"),
 	}))
 	.slice(0, 1);
+
+export const blogRSSQuery = q.star
+	.filterByType("article")
+	.order("publishedDate desc")
+	.project((sub) => ({
+		title: z.string(),
+		excerpt: z.string(),
+		publishedDate: z.string(),
+		slug: sub.field("slug.current", z.string()),
+	}));
+
+export const caseStudyRSSQuery = q.star
+	.filterByType("caseStudy")
+	.order("_updatedAt desc")
+	.project((sub) => ({
+		title: z.string(),
+		slug: sub.field("slug.current", z.string()),
+		_updatedAt: z.string(),
+		projectOverview: z.string(),
+	}));

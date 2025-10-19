@@ -56,6 +56,12 @@ const makeDescription = description
             },
             article: date ? { publishedTime: new Date(date).toISOString() } : undefined,
         }} />
+        <link
+    rel="alternate"
+    type="application/rss+xml"
+    title={makeTitle}
+    href={new URL("rss.xml", Astro.site)}
+/>
 	</head>
 	<body>
         <Header client:load />
