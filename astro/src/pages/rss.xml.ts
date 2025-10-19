@@ -27,7 +27,8 @@ export async function GET(context: APIContext) {
 				description: caseStudy.projectOverview,
 				link: `/projects/${caseStudy.slug}`,
 			})),
-		);
+		)
+		.sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime());
 	return rss({
 		title: "efobi.dev. Design Driven Development Agency",
 		description:
