@@ -3,6 +3,7 @@ import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { unsplashImageAsset } from "sanity-plugin-asset-source-unsplash";
 import { schemaTypes } from "./schemaTypes";
+import { codeInput } from "@sanity/code-input";
 
 export default defineConfig({
 	name: "default",
@@ -11,7 +12,7 @@ export default defineConfig({
 	projectId: "k745sfhh",
 	dataset: "production",
 
-	plugins: [structureTool(), visionTool(), unsplashImageAsset()],
+	plugins: [structureTool(), visionTool(), unsplashImageAsset(), codeInput()],
 
 	schema: {
 		types: schemaTypes,

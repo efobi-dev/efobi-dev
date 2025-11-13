@@ -1,0 +1,42 @@
+---
+
+interface Props {
+	node: {
+		code: string;
+		language?: string;
+		title?: string;
+	};
+}
+
+const { node } = Astro.props;
+const { code, language = "ts", title } = node;
+---
+
+<pre title={title} class="code-block">
+	{title ? <div class="code-title">{title}</div> : null}
+	<code class=`lang-${language}`>{code}</code>
+</pre>
+
+<script>
+	function highlight() {
+		//@ts-expect-error
+		if (typeof Prism !== "undefined") {
+			//@ts-expect-error
+			Prism.highlightAll();
+		}
+	}
+	highlight();
+	document.addEventListener("astro:page-load", highlight);
+</script>
+<style>
+	.code-block {
+		margin: 1rem 0;
+	}
+	.code-title {
+		background: #282c34;
+		color: #abb2bf;
+		padding: 0.5rem 1rem;
+		font-weight: 600;
+		border-radius: 4px 4px 0 0;
+	}
+</style>
