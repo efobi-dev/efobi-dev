@@ -50,7 +50,7 @@ var Prism = ((_self) => {
 		 * @memberof Prism
 		 * @public
 		 */
-		manual: _self.Prism && _self.Prism.manual,
+		manual: _self.Prism?.manual,
 		/**
 		 * By default, if Prism is in a web worker, it assumes that it is in a worker it created itself, so it uses
 		 * `addEventListener` to communicate with its parent instance. However, if you're using Prism manually in your
@@ -72,8 +72,7 @@ var Prism = ((_self) => {
 		 * @memberof Prism
 		 * @public
 		 */
-		disableWorkerMessageHandler:
-			_self.Prism && _self.Prism.disableWorkerMessageHandler,
+		disableWorkerMessageHandler: _self.Prism?.disableWorkerMessageHandler,
 
 		/**
 		 * A namespace for utility methods.
@@ -123,10 +122,10 @@ var Prism = ((_self) => {
 			 * @returns {number}
 			 */
 			objId: (obj) => {
-				if (!obj["__id"]) {
+				if (!obj.__id) {
 					Object.defineProperty(obj, "__id", { value: ++uniqueId });
 				}
-				return obj["__id"];
+				return obj.__id;
 			},
 
 			/**
@@ -213,7 +212,7 @@ var Prism = ((_self) => {
 
 				// add the new `language-xxxx` class
 				// (using `classList` will automatically clean up spaces for us)
-				element.classList.add("language-" + language);
+				element.classList.add(`language-${language}`);
 			},
 
 			/**
@@ -254,7 +253,7 @@ var Prism = ((_self) => {
 					if (src) {
 						var scripts = document.getElementsByTagName("script");
 						for (var i in scripts) {
-							if (scripts[i].src == src) {
+							if (scripts[i].src === src) {
 								return scripts[i];
 							}
 						}
@@ -283,7 +282,7 @@ var Prism = ((_self) => {
 			 * @returns {boolean}
 			 */
 			isActive: (element, className, defaultActivation) => {
-				var no = "no-" + className;
+				var no = `no-${className}`;
 
 				while (element) {
 					var classList = element.classList;
@@ -436,7 +435,7 @@ var Prism = ((_self) => {
 
 				for (var token in grammar) {
 					if (Object.hasOwn(grammar, token)) {
-						if (token == before) {
+						if (token === before) {
 							for (var newToken in insert) {
 								if (Object.hasOwn(insert, newToken)) {
 									ret[newToken] = insert[newToken];
@@ -456,7 +455,7 @@ var Prism = ((_self) => {
 
 				// Update references in other language definitions
 				_.languages.DFS(_.languages, function (key, value) {
-					if (value === old && key != inside) {
+					if (value === old && key !== inside) {
 						this[key] = ret;
 					}
 				});
@@ -603,7 +602,7 @@ var Prism = ((_self) => {
 
 				_.hooks.run("after-highlight", env);
 				_.hooks.run("complete", env);
-				callback && callback.call(env.element);
+				callback?.call(env.element);
 			}
 
 			_.hooks.run("before-sanity-check", env);
@@ -620,7 +619,7 @@ var Prism = ((_self) => {
 
 			if (!env.code) {
 				_.hooks.run("complete", env);
-				callback && callback.call(env.element);
+				callback?.call(env.element);
 				return;
 			}
 
@@ -678,7 +677,7 @@ var Prism = ((_self) => {
 			};
 			_.hooks.run("before-tokenize", env);
 			if (!env.grammar) {
-				throw new Error('The language "' + env.language + '" has no grammar.');
+				throw new Error(`The language "${env.language}" has no grammar.`);
 			}
 			env.tokens = _.tokenize(env.code, env.grammar);
 			_.hooks.run("after-tokenize", env);
@@ -858,7 +857,7 @@ var Prism = ((_self) => {
 	 * @static
 	 */
 	Token.stringify = function stringify(o, language) {
-		if (typeof o == "string") {
+		if (typeof o === "string") {
 			return o;
 		}
 		if (Array.isArray(o)) {
@@ -964,7 +963,7 @@ var Prism = ((_self) => {
 			patterns = Array.isArray(patterns) ? patterns : [patterns];
 
 			for (var j = 0; j < patterns.length; ++j) {
-				if (rematch && rematch.cause == token + "," + j) {
+				if (rematch && rematch.cause === `${token},${j}`) {
 					return;
 				}
 
@@ -977,7 +976,7 @@ var Prism = ((_self) => {
 				if (greedy && !patternObj.pattern.global) {
 					// Without the global flag, lastIndex won't work
 					var flags = patternObj.pattern.toString().match(/[imsuy]*$/)[0];
-					patternObj.pattern = RegExp(patternObj.pattern.source, flags + "g");
+					patternObj.pattern = RegExp(patternObj.pattern.source, `${flags}g`);
 				}
 
 				/** @type {RegExp} */
@@ -1091,7 +1090,7 @@ var Prism = ((_self) => {
 
 						/** @type {RematchOptions} */
 						var nestedRematch = {
-							cause: token + "," + j,
+							cause: `${token},${j}`,
 							reach: reach,
 						};
 						matchGrammar(
@@ -1265,7 +1264,7 @@ var Prism = ((_self) => {
 	return _;
 })(_self);
 
-if (typeof module !== "undefined" && module.exports) {
+if (module?.exports) {
 	module.exports = Prism;
 }
 
@@ -1407,15 +1406,15 @@ Prism.languages.markup = {
 	],
 };
 
-Prism.languages.markup["tag"].inside["attr-value"].inside["entity"] =
-	Prism.languages.markup["entity"];
-Prism.languages.markup["doctype"].inside["internal-subset"].inside =
+Prism.languages.markup.tag.inside["attr-value"].inside.entity =
+	Prism.languages.markup.entity;
+Prism.languages.markup.doctype.inside["internal-subset"].inside =
 	Prism.languages.markup;
 
 // Plugin to make entity title show the real entity, idea by Roman Komarov
 Prism.hooks.add("wrap", (env) => {
 	if (env.type === "entity") {
-		env.attributes["title"] = env.content.replace(/&amp;/, "&");
+		env.attributes.title = env.content.replace(/&amp;/, "&");
 	}
 });
 
@@ -1433,12 +1432,12 @@ Object.defineProperty(Prism.languages.markup.tag, "addInlined", {
 	 */
 	value: function addInlined(tagName, lang) {
 		var includedCdataInside = {};
-		includedCdataInside["language-" + lang] = {
+		includedCdataInside[`language-${lang}`] = {
 			pattern: /(^<!\[CDATA\[)[\s\S]+?(?=\]\]>$)/i,
 			lookbehind: true,
 			inside: Prism.languages[lang],
 		};
-		includedCdataInside["cdata"] = /^<!\[CDATA\[|\]\]>$/i;
+		includedCdataInside.cdata = /^<!\[CDATA\[|\]\]>$/i;
 
 		var inside = {
 			"included-cdata": {
@@ -1446,7 +1445,7 @@ Object.defineProperty(Prism.languages.markup.tag, "addInlined", {
 				inside: includedCdataInside,
 			},
 		};
-		inside["language-" + lang] = {
+		inside[`language-${lang}`] = {
 			pattern: /[\s\S]+/,
 			inside: Prism.languages[lang],
 		};
@@ -1499,7 +1498,7 @@ Object.defineProperty(Prism.languages.markup.tag, "addAttribute", {
 						value: {
 							pattern: /(^=\s*(["']|(?!["'])))\S[\s\S]*(?=\2$)/,
 							lookbehind: true,
-							alias: [lang, "language-" + lang],
+							alias: [lang, `language-${lang}`],
 							inside: Prism.languages[lang],
 						},
 						punctuation: [
@@ -1574,7 +1573,7 @@ Prism.languages.rss = Prism.languages.xml;
 				function: /^url/i,
 				punctuation: /^\(|\)$/,
 				string: {
-					pattern: RegExp("^" + string.source + "$"),
+					pattern: RegExp(`^${string.source}$`),
 					alias: "url",
 				},
 			},
@@ -1604,7 +1603,7 @@ Prism.languages.rss = Prism.languages.xml;
 		punctuation: /[(){};:,]/,
 	};
 
-	Prism.languages.css["atrule"].inside.rest = Prism.languages.css;
+	Prism.languages.css.atrule.inside.rest = Prism.languages.css;
 
 	var markup = Prism.languages.markup;
 	if (markup) {
@@ -1862,7 +1861,7 @@ Prism.languages.js = Prism.languages.javascript;
 
 	var LOADING_MESSAGE = "Loading…";
 	var FAILURE_MESSAGE = (status, message) =>
-		"✖ Error " + status + " while fetching file: " + message;
+		`✖ Error ${status} while fetching file: ${message}`;
 	var FAILURE_EMPTY_MESSAGE = "✖ Error: File does not exist or is empty";
 
 	var EXTENSIONS = {
@@ -1905,7 +1904,7 @@ Prism.languages.js = Prism.languages.javascript;
 		var xhr = new XMLHttpRequest();
 		xhr.open("GET", src, true);
 		xhr.onreadystatechange = () => {
-			if (xhr.readyState == 4) {
+			if (xhr.readyState === 4) {
 				if (xhr.status < 400 && xhr.responseText) {
 					success(xhr.responseText);
 				} else {
@@ -1947,7 +1946,7 @@ Prism.languages.js = Prism.languages.javascript;
 	}
 
 	Prism.hooks.add("before-highlightall", (env) => {
-		env.selector += ", " + SELECTOR;
+		env.selector += `, ${SELECTOR}`;
 	});
 
 	Prism.hooks.add("before-sanity-check", (env) => {
@@ -1967,7 +1966,7 @@ Prism.languages.js = Prism.languages.javascript;
 			if (language === "none") {
 				// the language might be 'none' because there is no language set;
 				// in this case, we want to use the extension as the language
-				var extension = (/\.(\w+)$/.exec(src) || [, "none"])[1];
+				var extension = (/\.(\w+)$/.exec(src) || [undefined, "none"])[1];
 				language = EXTENSIONS[extension] || extension;
 			}
 
