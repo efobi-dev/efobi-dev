@@ -19,6 +19,7 @@ import {
 const links: { href: string; text: string }[] = [
 	{ href: "/", text: "HOME" },
 	// { href: "/about", text: "ABOUT" },
+	{ href: "/services", text: "SERVICES" },
 	{ href: "/projects", text: "PROJECTS" },
 	{ href: "/blog", text: "BLOG" },
 	{ href: "/contact", text: "CONTACT" },

@@ -1,0 +1,25 @@
+---
+export const prerender = false;
+
+import Layout from "./layouts/Layout.astro";
+import { ServicesHero } from "@/components/services/hero";
+import { ServiceTiers } from "@/components/services/service-tiers";
+import { WhyChooseUs } from "@/components/services/why-choose-us";
+import { ProcessSection } from "@/components/services/process";
+import { CallToActionSection } from "@/components/home/cta";
+import { Separator } from "@/components/ui/separator";
+---
+
+<Layout title="Virtual Services - AI-Augmented BPO">
+  <div class="relative">
+    <ServicesHero client:load />
+    <Separator className="w-full" />
+    <ServiceTiers client:load />
+    <Separator className="w-full" />
+    <WhyChooseUs client:load />
+    <Separator className="w-full" />
+    <ProcessSection client:load />
+    <Separator className="w-full" />
+    <CallToActionSection client:load />
+  </div>
+</Layout>
