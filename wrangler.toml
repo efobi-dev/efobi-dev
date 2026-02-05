@@ -1,0 +1,9 @@
+name = "efobi-dev"
+compatibility_date = "2024-01-01"
+
+[build]
+command = "cd astro && bun install && bun run build"
+cwd = "."
+
+[build.upload]
+dir = "astro/dist"
