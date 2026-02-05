@@ -2,7 +2,7 @@
 	"name": "efobi-dev",
 	"dependencies": {},
 	"scripts": {
-		"build": "cd astro && bun install && bun run build",
+		"astro:deploy": "cd astro && bun install && bun run build",
 		"format": "biome check --write"
 	},
 	"devDependencies": {
