@@ -1,169 +1,199 @@
 import { motion } from "motion/react";
 import { Check, ArrowRight } from "lucide-react";
-import { useState } from "react";
 
 const tiers = [
   {
-    name: "Basic Data Entry",
-    price: "$5-8",
-    unit: "per hour",
-    description: "High-volume tasks with quick turnaround",
+    name: "Basic",
+    subtitle: "Data Entry",
+    price: "$5–8",
+    unit: "/hour",
+    description: "High-volume tasks. Quick turnaround. No frills.",
     features: [
       "Online/offline data entry",
-      "Copy-paste tasks",
-      "Form filling",
-      "PDF to Excel/Word conversion",
+      "Copy-paste operations",
+      "Form filling & validation",
+      "PDF → Excel/Word conversion",
       "Simple data cleaning",
-      "24-48 hour turnaround",
+      "24–48 hour turnaround",
       "98% accuracy guarantee",
     ],
-    popular: false,
+    accent: false,
   },
   {
-    name: "Virtual Assistance",
-    price: "$8-15",
-    unit: "per hour",
-    description: "Recurring support for your business operations",
+    name: "Professional",
+    subtitle: "Virtual Assistance",
+    price: "$8–15",
+    unit: "/hour",
+    description: "Recurring support. Dedicated account manager. Premium touch.",
     features: [
-      "Email management",
-      "Calendar scheduling",
+      "Email & calendar management",
       "Customer support (email/chat)",
       "Data research & reporting",
-      "CRM updates",
-      "Social media posting",
-      "Priority support",
+      "CRM updates & maintenance",
+      "Social media scheduling",
+      "Priority response time",
       "Dedicated account manager",
+      "Quality assurance review",
     ],
-    popular: true,
+    accent: true,
   },
   {
-    name: "Specialized Services",
-    price: "$15-25",
-    unit: "per hour",
-    description: "Premium services with industry expertise",
+    name: "Specialized",
+    subtitle: "Expert Services",
+    price: "$15–25",
+    unit: "/hour",
+    description: "Industry expertise. AI-augmented workflows. White-glove service.",
     features: [
-      "E-commerce product listings (Amazon, Shopify)",
+      "E-commerce product listings",
       "Medical transcription",
       "Legal data entry",
       "Database management",
-      "AI-augmented data processing",
-      "Business intelligence data entry",
+      "AI-augmented processing",
+      "Business intelligence data",
       "Same-day turnaround available",
-      "White-glove service",
+      "White-glove concierge service",
     ],
-    popular: false,
+    accent: false,
   },
 ];
 
 export function ServiceTiers() {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-
   return (
-    <section id="services" className="min-h-screen p-8 py-24 bg-background">
-      <div className="w-full max-w-[1400px] mx-auto">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-[clamp(2rem,6vw,4rem)] font-black leading-tight text-secondary-foreground mb-4 uppercase">
-            Choose Your Service Tier
-          </h2>
-          <p className="text-lg text-accent-foreground max-w-2xl mx-auto">
-            Flexible pricing to match your needs. Scale up or down anytime.
-          </p>
-        </motion.div>
+    <section id="pricing" className="relative py-32 md:py-40 bg-background overflow-hidden">
+      {/* Background elements */}
+      <div className="absolute top-1/4 left-0 w-96 h-96 bg-primary/5 blur-[120px] rounded-full" />
+      <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-primary/5 blur-[120px] rounded-full" />
+      
+      <div className="relative z-10 w-full max-w-[1600px] mx-auto px-6 md:px-12">
+        
+        {/* Section header - asymmetric */}
+        <div className="grid md:grid-cols-12 gap-12 mb-20">
+          <div className="md:col-span-5">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <span className="text-sm font-mono tracking-wider text-primary uppercase border-l-2 border-primary pl-3 inline-block mb-6">
+                Pricing
+              </span>
+              <h2 className="text-[clamp(2.5rem,6vw,5rem)] font-black leading-[0.9] tracking-tighter text-secondary-foreground">
+                Choose
+                <br />
+                Your Scale
+              </h2>
+            </motion.div>
+          </div>
+          
+          <div className="md:col-span-6 md:col-start-7 flex items-end">
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-lg md:text-xl text-accent-foreground leading-relaxed"
+            >
+              Flexible pricing that scales with your needs. No lock-in contracts. 
+              Cancel anytime. Pay only for what you use.
+            </motion.p>
+          </div>
+        </div>
 
-        {/* Pricing Cards */}
+        {/* Pricing cards - staggered grid */}
         <div className="grid md:grid-cols-3 gap-8">
           {tiers.map((tier, index) => (
             <motion.div
               key={tier.name}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              onHoverStart={() => setHoveredIndex(index)}
-              onHoverEnd={() => setHoveredIndex(null)}
-              className={`relative p-8 rounded-xl border ${
-                tier.popular
-                  ? "border-primary bg-primary/5"
-                  : "border-border bg-card"
-              } transition-all duration-300 ${
-                hoveredIndex === index ? "scale-[1.02] shadow-lg" : ""
-              }`}
+              transition={{ duration: 0.5, delay: index * 0.15 }}
+              className={`group relative ${tier.accent ? 'md:-translate-y-8' : ''}`}
             >
-              {/* Popular Badge */}
-              {tier.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-primary text-primary-foreground rounded-full text-sm font-semibold">
-                  Most Popular
+              <div className={`relative h-full p-8 border-2 transition-all duration-300 ${
+                tier.accent
+                  ? 'border-primary bg-primary/5 hover:border-primary hover:shadow-2xl hover:shadow-primary/20'
+                  : 'border-border bg-card hover:border-primary/50'
+              }`}>
+                
+                {/* Popular badge */}
+                {tier.accent && (
+                  <div className="absolute -top-4 left-8 px-4 py-1 bg-primary text-primary-foreground text-xs font-mono tracking-wider uppercase">
+                    Most Popular
+                  </div>
+                )}
+
+                {/* Tier header */}
+                <div className="mb-8 pb-8 border-b border-border">
+                  <div className="text-sm font-mono text-primary mb-2 tracking-wider uppercase">
+                    {tier.subtitle}
+                  </div>
+                  <h3 className="text-3xl font-black mb-3">{tier.name}</h3>
+                  <div className="flex items-baseline gap-1 mb-4">
+                    <span className="text-5xl font-black text-primary">{tier.price}</span>
+                    <span className="text-muted-foreground">{tier.unit}</span>
+                  </div>
+                  <p className="text-sm text-accent-foreground leading-relaxed">
+                    {tier.description}
+                  </p>
                 </div>
-              )}
 
-              {/* Tier Name */}
-              <h3 className="text-2xl font-bold mb-2">{tier.name}</h3>
-              
-              {/* Price */}
-              <div className="mb-4">
-                <span className="text-4xl font-black text-primary">
-                  {tier.price}
-                </span>
-                <span className="text-muted-foreground ml-2">{tier.unit}</span>
+                {/* Features list */}
+                <ul className="space-y-3 mb-8">
+                  {tier.features.map((feature) => (
+                    <li key={feature} className="flex items-start gap-3 text-sm">
+                      <Check className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* CTA */}
+                <a
+                  href="/contact"
+                  className={`group/btn flex items-center justify-center gap-2 w-full py-4 font-semibold transition-all duration-300 ${
+                    tier.accent
+                      ? 'bg-primary text-primary-foreground hover:gap-3'
+                      : 'border-2 border-border hover:border-primary hover:text-primary hover:gap-3'
+                  }`}
+                >
+                  Get Started
+                  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
+                </a>
               </div>
-
-              {/* Description */}
-              <p className="text-sm text-accent-foreground mb-6">
-                {tier.description}
-              </p>
-
-              {/* Features */}
-              <ul className="space-y-3 mb-8">
-                {tier.features.map((feature) => (
-                  <li key={feature} className="flex items-start gap-2">
-                    <Check className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                    <span className="text-sm">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-
-              {/* CTA Button */}
-              <a
-                href="/contact"
-                className={`flex items-center justify-center gap-2 w-full px-6 py-3 rounded-lg font-semibold transition-colors ${
-                  tier.popular
-                    ? "bg-primary text-primary-foreground hover:bg-primary/90"
-                    : "bg-accent text-accent-foreground hover:bg-accent/80"
-                }`}
-              >
-                Get Started
-                <ArrowRight className="w-4 h-4" />
-              </a>
             </motion.div>
           ))}
         </div>
 
-        {/* Custom Solutions CTA */}
+        {/* Custom solutions callout */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-16 text-center"
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="mt-20 p-12 border-2 border-border bg-card/50 backdrop-blur-sm"
         >
-          <p className="text-lg text-accent-foreground mb-4">
-            Need a custom solution? We offer monthly retainers and project-based pricing.
-          </p>
-          <a
-            href="/contact"
-            className="inline-flex items-center gap-2 text-primary font-semibold hover:underline"
-          >
-            Contact us for custom pricing
-            <ArrowRight className="w-4 h-4" />
-          </a>
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <h3 className="text-3xl font-black mb-4">Need something custom?</h3>
+              <p className="text-lg text-accent-foreground leading-relaxed">
+                We offer monthly retainers, project-based pricing, and enterprise packages. 
+                Let's talk about your specific needs.
+              </p>
+            </div>
+            <div className="flex justify-start md:justify-end">
+              <a
+                href="/contact"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-semibold hover:gap-3 transition-all duration-300"
+              >
+                Contact Sales
+                <ArrowRight className="w-5 h-5" />
+              </a>
+            </div>
+          </div>
         </motion.div>
+
       </div>
     </section>
   );

@@ -1,104 +1,128 @@
 import { motion } from "motion/react";
-import { FileText, Bot, CheckCircle, Send } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 const steps = [
   {
-    icon: FileText,
-    title: "1. Share Your Requirements",
+    number: "01",
+    title: "Brief Us",
     description:
-      "Tell us what you need. Whether it's data entry, virtual assistance, or specialized work, we'll understand your goals and timeline.",
+      "Tell us what you need. Scope, timeline, special requirements. We'll clarify any questions within the hour.",
   },
   {
-    icon: Bot,
-    title: "2. AI Pre-Processing",
+    number: "02",
+    title: "AI Analyzes",
     description:
-      "Our AI system analyzes your project, structures the workflow, and handles the heavy lifting—automation at its finest.",
+      "Our system structures the workflow, identifies edge cases, and handles bulk pre-processing automatically.",
   },
   {
-    icon: CheckCircle,
-    title: "3. Human Quality Control",
+    number: "03",
+    title: "Humans Execute",
     description:
-      "Our expert team reviews every detail, ensuring accuracy and consistency. The human touch that makes all the difference.",
+      "Expert team tackles the work with speed and precision. Quality checks at every stage. No detail overlooked.",
   },
   {
-    icon: Send,
-    title: "4. Delivery & Support",
+    number: "04",
+    title: "You Receive",
     description:
-      "Get your completed work on time, every time. Plus ongoing support if you need revisions or have questions.",
+      "Delivered on time (or early). Review, request revisions if needed. We stand by our work.",
   },
 ];
 
 export function ProcessSection() {
   return (
-    <section className="min-h-screen p-8 py-24 bg-background">
-      <div className="w-full max-w-[1400px] mx-auto">
-        {/* Section Header */}
+    <section className="relative py-32 md:py-40 bg-background">
+      <div className="w-full max-w-[1600px] mx-auto px-6 md:px-12">
+        
+        {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.6 }}
+          className="mb-20"
         >
-          <h2 className="text-[clamp(2rem,6vw,4rem)] font-black leading-tight text-secondary-foreground mb-4 uppercase">
-            How It Works
+          <span className="text-sm font-mono tracking-wider text-primary uppercase border-l-2 border-primary pl-3 inline-block mb-6">
+            Process
+          </span>
+          <h2 className="text-[clamp(2.5rem,6vw,5rem)] font-black leading-[0.9] tracking-tighter text-secondary-foreground max-w-4xl">
+            From Inquiry
+            <br />
+            to Delivery
           </h2>
-          <p className="text-lg text-accent-foreground max-w-2xl mx-auto">
-            From inquiry to delivery, we've streamlined every step to save you time.
-          </p>
         </motion.div>
 
-        {/* Process Steps */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {steps.map((step, index) => {
-            const Icon = step.icon;
-            return (
+        {/* Steps - vertical timeline */}
+        <div className="relative">
+          {/* Connecting line */}
+          <div className="absolute left-0 md:left-12 top-0 bottom-0 w-px bg-border hidden md:block" />
+
+          <div className="space-y-16 md:space-y-20">
+            {steps.map((step, index) => (
               <motion.div
-                key={step.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                key={step.number}
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="relative"
               >
-                {/* Connector Line (desktop only) */}
-                {index < steps.length - 1 && (
-                  <div className="hidden lg:block absolute top-12 left-[60%] w-[80%] h-[2px] bg-border" />
-                )}
-
-                {/* Step Card */}
-                <div className="relative p-6 rounded-xl bg-card border border-border hover:border-primary/50 transition-all duration-300 h-full">
-                  <div className="flex flex-col items-center text-center">
-                    <div className="w-16 h-16 rounded-full bg-primary/10 text-primary flex items-center justify-center mb-4 relative z-10">
-                      <Icon className="w-8 h-8" />
+                <div className="grid md:grid-cols-12 gap-8 items-start">
+                  
+                  {/* Number badge */}
+                  <div className="md:col-span-2">
+                    <div className="relative inline-flex items-center justify-center w-20 h-20 md:w-24 md:h-24 border-2 border-primary bg-background">
+                      <span className="text-2xl md:text-3xl font-black text-primary">
+                        {step.number}
+                      </span>
+                      {/* Dot on timeline */}
+                      <div className="hidden md:block absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-primary border-4 border-background" />
                     </div>
-                    <h3 className="text-lg font-bold mb-3">{step.title}</h3>
-                    <p className="text-sm text-accent-foreground leading-relaxed">
-                      {step.description}
-                    </p>
                   </div>
+
+                  {/* Content */}
+                  <div className="md:col-span-10">
+                    <div className="space-y-4">
+                      <h3 className="text-3xl md:text-4xl font-black">
+                        {step.title}
+                      </h3>
+                      <p className="text-lg md:text-xl text-accent-foreground leading-relaxed max-w-2xl">
+                        {step.description}
+                      </p>
+                    </div>
+                  </div>
+
                 </div>
               </motion.div>
-            );
-          })}
+            ))}
+          </div>
         </div>
 
-        {/* CTA */}
+        {/* CTA - bold callout */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          className="mt-16 text-center"
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="mt-32 p-12 md:p-16 border-4 border-primary bg-primary/5"
         >
-          <a
-            href="/contact"
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors"
-          >
-            Start Your First Project
-            <Send className="w-4 h-4" />
-          </a>
+          <div className="max-w-3xl">
+            <h3 className="text-4xl md:text-5xl font-black mb-6 leading-tight">
+              Ready to work 3× faster?
+            </h3>
+            <p className="text-xl text-accent-foreground mb-8 leading-relaxed">
+              Start your first project today. No commitment required. 
+              Pay only for completed work.
+            </p>
+            <a
+              href="/contact"
+              className="group inline-flex items-center gap-3 px-10 py-5 bg-primary text-primary-foreground font-bold text-lg hover:gap-4 transition-all duration-300"
+            >
+              Start Your First Project
+              <ArrowRight className="w-6 h-6 transition-transform duration-300 group-hover:translate-x-1" />
+            </a>
+          </div>
         </motion.div>
+
       </div>
     </section>
   );
